@@ -28,6 +28,7 @@ class GameState: ObservableObject {
     @Published var bedtimeStart: Date
     @Published var bedtimeEnd: Date
     @Published var notificationsEnabled: Bool
+    @Published var lastUsageMinutes: Int?
     
     var sheepCount: Int
     
@@ -39,7 +40,8 @@ class GameState: ObservableObject {
         mode: GameMode = .cozy,
         bedtimeStart: Date = GameState.defaultBedtimeStart,
         bedtimeEnd: Date = GameState.defaultBedtimeEnd,
-        notificationsEnabled: Bool = false
+        notificationsEnabled: Bool = false,
+        lastUsageMinutes: Int? = nil
     ) {
         self.coins = coins
         self.streak = streak
@@ -49,6 +51,9 @@ class GameState: ObservableObject {
         self.bedtimeStart = bedtimeStart
         self.bedtimeEnd = bedtimeEnd
         self.notificationsEnabled = notificationsEnabled
+        self.lastUsageMinutes = lastUsageMinutes
+        
+        loadPersistedState()
     }
     
     func logNight(level: NightSuccessLevel) {
@@ -74,11 +79,14 @@ class GameState: ObservableObject {
         case .zeroStars:
             break
         }
+        
+        persistState()
     }
     
     // Placeholder for Verified mode: map usage minutes to star level
     func logNightFromUsageMinutes(_ minutes: Int) -> NightSuccessLevel {
         let level = Self.level(forUsageMinutes: minutes)
+        lastUsageMinutes = minutes
         logNight(level: level)
         return level
     }
@@ -95,6 +103,63 @@ class GameState: ObservableObject {
     func needsCheckInToday() -> Bool {
         guard let last = lastNightResult?.date else { return true }
         return !Calendar.current.isDateInToday(last)
+    }
+    
+    // MARK: - Persistence (simple UserDefaults)
+    private let storageKey = "GameState.persistence.v1"
+    
+    private struct PersistedState: Codable {
+        let coins: Int
+        let streak: Int
+        let lastNightResult: NightResult?
+        let mode: GameMode
+        let bedtimeStart: Date
+        let bedtimeEnd: Date
+        let notificationsEnabled: Bool
+        let lastUsageMinutes: Int?
+    }
+    
+    private func persistState() {
+        let state = PersistedState(
+            coins: coins,
+            streak: streak,
+            lastNightResult: lastNightResult,
+            mode: mode,
+            bedtimeStart: bedtimeStart,
+            bedtimeEnd: bedtimeEnd,
+            notificationsEnabled: notificationsEnabled,
+            lastUsageMinutes: lastUsageMinutes
+        )
+        if let data = try? JSONEncoder().encode(state) {
+            UserDefaults.standard.set(data, forKey: storageKey)
+        }
+    }
+    
+    private func loadPersistedState() {
+        guard let data = UserDefaults.standard.data(forKey: storageKey),
+              let state = try? JSONDecoder().decode(PersistedState.self, from: data) else { return }
+        coins = state.coins
+        streak = state.streak
+        lastNightResult = state.lastNightResult
+        mode = state.mode
+        bedtimeStart = state.bedtimeStart
+        bedtimeEnd = state.bedtimeEnd
+        notificationsEnabled = state.notificationsEnabled
+        lastUsageMinutes = state.lastUsageMinutes
+    }
+    
+    // Call when user changes settings
+    func syncSettingsToStorage() {
+        persistState()
+    }
+    
+    // MARK: - Reward gating (example multiplier)
+    var rewardMultiplier: Double {
+        mode == .verified ? 1.2 : 1.0
+    }
+    
+    var isVerifiedEligible: Bool {
+        mode == .verified && lastUsageMinutes != nil
     }
     
     // MARK: - Defaults

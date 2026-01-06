@@ -112,6 +112,51 @@ struct AppRootView: View {
             if navigation.activeScreen == .farm && gameState.needsCheckInToday() {
                 navigation.navigate(to: .checkIn)
             }
+            
+            // Re-schedule notifications on launch if enabled
+            NotificationScheduler.requestAuthorization { granted in
+                if granted && gameState.notificationsEnabled {
+                    NotificationScheduler.scheduleBedtimeAndMorning(
+                        bedtimeStart: gameState.bedtimeStart,
+                        bedtimeEnd: gameState.bedtimeEnd,
+                        enabled: true
+                    )
+                }
+            }
+            
+            // Start Screen Time monitoring if in Verified mode
+            if gameState.mode == .verified {
+                ScreenTimeService.shared.startMonitoring(
+                    bedtimeStart: gameState.bedtimeStart,
+                    bedtimeEnd: gameState.bedtimeEnd
+                )
+            }
+        }
+        .onChange(of: gameState.mode) { oldMode, newMode in
+            if newMode == .verified {
+                ScreenTimeService.shared.startMonitoring(
+                    bedtimeStart: gameState.bedtimeStart,
+                    bedtimeEnd: gameState.bedtimeEnd
+                )
+            } else {
+                ScreenTimeService.shared.stopMonitoring()
+            }
+        }
+        .onChange(of: gameState.bedtimeStart) { _, _ in
+            if gameState.mode == .verified {
+                ScreenTimeService.shared.startMonitoring(
+                    bedtimeStart: gameState.bedtimeStart,
+                    bedtimeEnd: gameState.bedtimeEnd
+                )
+            }
+        }
+        .onChange(of: gameState.bedtimeEnd) { _, _ in
+            if gameState.mode == .verified {
+                ScreenTimeService.shared.startMonitoring(
+                    bedtimeStart: gameState.bedtimeStart,
+                    bedtimeEnd: gameState.bedtimeEnd
+                )
+            }
         }
     }
 }

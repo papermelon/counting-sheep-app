@@ -135,8 +135,24 @@ struct SettingsScreen: View {
                 .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
             
             DatePicker("Start", selection: $gameState.bedtimeStart, displayedComponents: .hourAndMinute)
+                .onChange(of: gameState.bedtimeStart) { _ in
+                    NotificationScheduler.scheduleBedtimeAndMorning(
+                        bedtimeStart: gameState.bedtimeStart,
+                        bedtimeEnd: gameState.bedtimeEnd,
+                        enabled: gameState.notificationsEnabled
+                    )
+                    gameState.syncSettingsToStorage()
+                }
             DatePicker("End", selection: $gameState.bedtimeEnd, displayedComponents: .hourAndMinute)
                 .environment(\.locale, Locale(identifier: "en_US_POSIX"))
+                .onChange(of: gameState.bedtimeEnd) { _ in
+                    NotificationScheduler.scheduleBedtimeAndMorning(
+                        bedtimeStart: gameState.bedtimeStart,
+                        bedtimeEnd: gameState.bedtimeEnd,
+                        enabled: gameState.notificationsEnabled
+                    )
+                    gameState.syncSettingsToStorage()
+                }
             
             Text("Used for nightly tracking and notifications.")
                 .font(.subheadline)
@@ -156,6 +172,20 @@ struct SettingsScreen: View {
                 .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
             
             Toggle("Remind me to check in", isOn: $gameState.notificationsEnabled)
+                .onChange(of: gameState.notificationsEnabled) { _ in
+                    NotificationScheduler.requestAuthorization { granted in
+                        if granted {
+                            NotificationScheduler.scheduleBedtimeAndMorning(
+                                bedtimeStart: gameState.bedtimeStart,
+                                bedtimeEnd: gameState.bedtimeEnd,
+                                enabled: gameState.notificationsEnabled
+                            )
+                        } else {
+                            gameState.notificationsEnabled = false
+                        }
+                        gameState.syncSettingsToStorage()
+                    }
+                }
             
             Text("Evening reminders for bedtime, morning reminders for check-in.")
                 .font(.subheadline)

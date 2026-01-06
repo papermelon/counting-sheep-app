@@ -94,21 +94,10 @@ struct MorningCheckInScreen: View {
             checkInButton(title: "☆ Rough night", level: .zeroStars, color: Color(red: 0.95, green: 0.95, blue: 0.95))
             
             if gameState.mode == .verified {
-                Button {
-                    // Placeholder: in real Verified mode, use Screen Time minutes from bedtime window
-                    _ = gameState.logNightFromUsageMinutes(12)
-                    onClose()
-                } label: {
-                    Text("Auto-grade (Screen Time)")
-                        .font(.system(size: 15, weight: .semibold))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color(red: 0.88, green: 0.92, blue: 1.0))
-                        )
-                }
-                .buttonStyle(.plain)
+                VerifiedModeButton(
+                    gameState: gameState,
+                    onComplete: onClose
+                )
             }
         }
     }
