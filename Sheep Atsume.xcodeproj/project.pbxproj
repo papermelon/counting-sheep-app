@@ -32,8 +32,8 @@
 		797D3E1B2F0C0E980013222F = {
 			isa = PBXGroup;
 			children = (
-				797D3E262F0C0E980013222F /* Sheep Atsume */,
 				797D3E252F0C0E980013222F /* Products */,
+				797D3E262F0C0E980013222F /* Sheep Atsume */,
 			);
 			sourceTree = "<group>";
 		};
