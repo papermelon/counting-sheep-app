@@ -48,11 +48,11 @@ struct FarmBackground: View {
                         )
                     )
                     .frame(height: geometry.size.height * 0.5)
-                    .offset(y: geometry.size.height * 0.24)
+                    .offset(y: geometry.size.height * 0.25)
                 
                 // Simple fence at bottom
                 fenceRow(width: geometry.size.width)
-                    .offset(y: geometry.size.height * 0.34)
+                    .offset(y: geometry.size.height * 0.42)
                 
                 // Sun
                 Circle()
@@ -91,8 +91,8 @@ struct FarmBackground: View {
     
     @ViewBuilder
     private func fenceRow(width: CGFloat) -> some View {
-        HStack(spacing: 24) {
-            ForEach(0..<Int(width / 36), id: \.self) { _ in
+        HStack(spacing: 30) {
+            ForEach(0..<Int(width / 40), id: \.self) { _ in
                 fencePost()
             }
         }
@@ -103,13 +103,13 @@ struct FarmBackground: View {
         VStack(spacing: 0) {
             // Top of post
             Circle()
-                .fill(Color(red: 0.45, green: 0.32, blue: 0.18))
-                .frame(width: 9, height: 9)
+                .fill(Color(red: 0.55, green: 0.4, blue: 0.25))
+                .frame(width: 8, height: 8)
             
             // Post
             Rectangle()
-                .fill(Color(red: 0.5, green: 0.38, blue: 0.22))
-                .frame(width: 7, height: 42)
+                .fill(Color(red: 0.6, green: 0.45, blue: 0.3))
+                .frame(width: 6, height: 35)
         }
     }
     

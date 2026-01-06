@@ -24,29 +24,10 @@ struct SettingsScreen: View {
                 // Content
                 ScrollView {
                     VStack(spacing: 20) {
-                        // Manual Check-in Section
-                        VStack(alignment: .leading, spacing: 12) {
-                            Text("Manual Check-in")
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
-                            
-                            VStack(spacing: 10) {
-                                checkInButton(label: "Great 🌟", level: .great, color: Color(red: 0.95, green: 0.85, blue: 0.4))
-                                checkInButton(label: "Okay 🙂", level: .okay, color: Color(red: 0.7, green: 0.85, blue: 0.95))
-                                checkInButton(label: "Slipped 😬", level: .slipped, color: Color(red: 1.0, green: 0.8, blue: 0.7))
-                                checkInButton(label: "Bad 😴", level: .bad, color: Color(red: 0.85, green: 0.85, blue: 0.85))
-                            }
-                            
-                            Text("Manual check-in for MVP. Verification will be added later.")
-                                .font(.footnote)
-                                .foregroundStyle(.secondary)
-                                .padding(.top, 4)
-                        }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(Color.white.opacity(0.7))
-                        )
+                        modeSection
+                        bedtimeSection
+                        notificationsSection
+                        roadmapSection
                     }
                     .padding()
                 }
@@ -100,26 +81,91 @@ struct SettingsScreen: View {
         .background(Color.white.opacity(0.5))
     }
     
-    @ViewBuilder
-    private func checkInButton(label: String, level: NightSuccessLevel, color: Color) -> some View {
-        Button {
-            gameState.logNight(level: level)
-        } label: {
-            Text(label)
-                .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(Color(red: 0.3, green: 0.2, blue: 0.1))
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(color)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color(red: 0.6, green: 0.5, blue: 0.4), lineWidth: 1.5)
-                )
+    private var modeSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Mode")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
+            
+            Picker("Mode", selection: $gameState.mode) {
+                ForEach(GameMode.allCases, id: \.self) { mode in
+                    Text(mode.displayName).tag(mode)
+                }
+            }
+            .pickerStyle(.segmented)
+            
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Cozy: manual check-ins; sheep always return safely with common rewards.")
+                Text("Verified: uses Screen Time at night to auto-grade stars; better growth and rare items.")
+            }
+            .font(.subheadline)
+            .foregroundStyle(.secondary)
         }
-        .buttonStyle(.plain)
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.7))
+        )
+    }
+    
+    private var roadmapSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Coming soon")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
+            
+            VStack(alignment: .leading, spacing: 6) {
+                Text("• Screen Time integration for Verified mode")
+                Text("• Live Activity: \"Sheep are grazing...\"")
+            }
+            .font(.subheadline)
+            .foregroundStyle(.secondary)
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.7))
+        )
+    }
+    
+    private var bedtimeSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Bedtime window")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
+            
+            DatePicker("Start", selection: $gameState.bedtimeStart, displayedComponents: .hourAndMinute)
+            DatePicker("End", selection: $gameState.bedtimeEnd, displayedComponents: .hourAndMinute)
+                .environment(\.locale, Locale(identifier: "en_US_POSIX"))
+            
+            Text("Used for nightly tracking and notifications.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.7))
+        )
+    }
+    
+    private var notificationsSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Notifications")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
+            
+            Toggle("Remind me to check in", isOn: $gameState.notificationsEnabled)
+            
+            Text("Evening reminders for bedtime, morning reminders for check-in.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.7))
+        )
     }
 }
 

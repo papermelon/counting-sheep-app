@@ -11,7 +11,6 @@ struct FarmView: View {
     @EnvironmentObject var gameState: GameState
     
     private var sheepCount: Int {
-        // Always show at least one sheep so the farm feels alive on first launch
         max(1, gameState.streak)
     }
     
@@ -30,26 +29,18 @@ struct FarmView: View {
     
     @ViewBuilder
     private func sheepLayer(in size: CGSize) -> some View {
-        // Deterministic grid placement so sheep stay visible and don't overlap
-        let pasture = CGRect(
-            x: size.width * 0.1,
-            y: size.height * 0.35,
-            width: size.width * 0.8,
-            height: size.height * 0.5
-        )
-        let columns = 3
-        let rows = max(1, Int(ceil(Double(sheepCount) / Double(columns))))
-        let cellWidth = pasture.width / CGFloat(columns)
-        let cellHeight = pasture.height / CGFloat(rows)
+        // Position sheep in the pasture area (lower 2/3 of screen)
+        let pastureTop = size.height * 0.35
+        let pastureHeight = size.height * 0.5
+        let pastureWidth = size.width * 0.8
+        let startX = size.width * 0.1
         
         ForEach(0..<sheepCount, id: \.self) { index in
-            let row = index / columns
-            let col = index % columns
-            let x = pasture.minX + cellWidth * (CGFloat(col) + 0.5)
-            let y = pasture.minY + cellHeight * (CGFloat(row) + 0.5)
-            
             SheepSprite()
-                .position(x: x, y: y)
+                .position(
+                    x: startX + CGFloat.random(in: 0...pastureWidth),
+                    y: pastureTop + CGFloat.random(in: 0...pastureHeight)
+                )
                 .id("sheep-\(index)-\(sheepCount)") // Stable positioning per count
         }
     }

@@ -32,6 +32,7 @@ struct MenuGrid: View {
                 
                 // Menu grid
                 LazyVGrid(columns: columns, spacing: 16) {
+                    menuItem(icon: "🕑", label: "Check-in", screen: .checkIn)
                     menuItem(icon: "🐑", label: "Sheep", screen: .sheepBook)
                     menuItem(icon: "🛒", label: "Shop", screen: .shop)
                     menuItem(icon: "📦", label: "Goodies", screen: .goodies)
@@ -101,6 +102,8 @@ struct MenuGrid: View {
     
     private func colorForScreen(_ screen: ActiveScreen) -> Color {
         switch screen {
+        case .checkIn:
+            return Color(red: 0.9, green: 0.9, blue: 1.0) // soft blue
         case .sheepBook:
             return Color(red: 1.0, green: 0.85, blue: 0.9) // Pink
         case .shop:

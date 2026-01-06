@@ -11,12 +11,12 @@ struct CurrencyBar: View {
     @EnvironmentObject var gameState: GameState
     
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 20) {
             // Coins
-            currencyItem(icon: "🪙", label: "Coins", value: gameState.coins)
+            currencyItem(icon: "🪙", value: gameState.coins)
             
             // Streak
-            currencyItem(icon: "🔥", label: "Streak", value: gameState.streak)
+            currencyItem(icon: "🔥", value: gameState.streak)
             
             Spacer()
         }
@@ -32,23 +32,18 @@ struct CurrencyBar: View {
                 .stroke(Color(red: 0.85, green: 0.75, blue: 0.6), lineWidth: 2)
         )
         .padding(.horizontal, 20)
-        .padding(.bottom, 12)
+        .padding(.bottom, 8)
     }
     
     @ViewBuilder
-    private func currencyItem(icon: String, label: String, value: Int) -> some View {
-        HStack(spacing: 8) {
+    private func currencyItem(icon: String, value: Int) -> some View {
+        HStack(spacing: 6) {
             Text(icon)
                 .font(.system(size: 20))
             
-            VStack(alignment: .leading, spacing: 2) {
-                Text(label)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                Text("\(value)")
-                    .font(.system(size: 16, weight: .bold, design: .rounded))
-                    .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
-            }
+            Text("\(value)")
+                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
         }
     }
 }
