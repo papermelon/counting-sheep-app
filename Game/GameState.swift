@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftUI
+import Combine
 
 class GameState: ObservableObject {
     @Published var coins: Int
