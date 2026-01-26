@@ -6,17 +6,46 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXFileReference section */
-		797D3E242F0C0E980013222F /* Sheep Atsume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sheep Atsume.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-/* End PBXFileReference section */
+/* Begin PBXBuildFile section */
+		792DE9CD2F0D77850048F9D6 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DE9BF2F0D77850048F9D6 /* AppRootView.swift */; };
+		792DE9D02F0D77850048F9D6 /* Sheep_AtsumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DE9C02F0D77850048F9D6 /* Sheep_AtsumeApp.swift */; };
+		792DE9D12F0D77850048F9D6 /* NightResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DE9C22F0D77850048F9D6 /* NightResult.swift */; };
+		792DE9D32F0D77850048F9D6 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DE9C52F0D77850048F9D6 /* GameState.swift */; };
+		792DE9D42F0D77850048F9D6 /* NightSuccessLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DE9C32F0D77850048F9D6 /* NightSuccessLevel.swift */; };
+		79B17F9C2F0D87E100DAF850 /* AppNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17F9A2F0D87E100DAF850 /* AppNavigation.swift */; };
+		79B17FC32F0D884500DAF850 /* GoodiesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FBD2F0D884500DAF850 /* GoodiesScreen.swift */; };
+		79B17FC42F0D884500DAF850 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FBE2F0D884500DAF850 /* SettingsScreen.swift */; };
+		79B17FC52F0D884500DAF850 /* ShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FC02F0D884500DAF850 /* ShopScreen.swift */; };
+		79B17FC62F0D884500DAF850 /* FarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FB62F0D884500DAF850 /* FarmView.swift */; };
+		79B17FC72F0D884500DAF850 /* CurrencyBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FBB2F0D884500DAF850 /* CurrencyBar.swift */; };
+		79B17FC82F0D884500DAF850 /* FarmBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FB52F0D884500DAF850 /* FarmBackground.swift */; };
+		79B17FC92F0D884500DAF850 /* MenuGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FB92F0D884500DAF850 /* MenuGrid.swift */; };
+		79B17FCA2F0D884500DAF850 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FB82F0D884500DAF850 /* MenuButton.swift */; };
+		79B17FCB2F0D884500DAF850 /* SheepBookScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FBF2F0D884500DAF850 /* SheepBookScreen.swift */; };
+		79B17FCD2F0D9A9800DAF850 /* TutorialOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FCC2F0D9A9800DAF850 /* TutorialOverlay.swift */; };
+		79B17FCF2F0DA74B00DAF850 /* MorningCheckInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FCE2F0DA74B00DAF850 /* MorningCheckInScreen.swift */; };
+/* End PBXBuildFile section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		797D3E262F0C0E980013222F /* Sheep Atsume */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Sheep Atsume";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
+/* Begin PBXFileReference section */
+		792DE9BF2F0D77850048F9D6 /* AppRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootView.swift; sourceTree = "<group>"; };
+		792DE9C02F0D77850048F9D6 /* Sheep_AtsumeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheep_AtsumeApp.swift; sourceTree = "<group>"; };
+		792DE9C22F0D77850048F9D6 /* NightResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightResult.swift; sourceTree = "<group>"; };
+		792DE9C32F0D77850048F9D6 /* NightSuccessLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightSuccessLevel.swift; sourceTree = "<group>"; };
+		792DE9C52F0D77850048F9D6 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		797D3E242F0C0E980013222F /* Sheep Atsume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sheep Atsume.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		79B17F9A2F0D87E100DAF850 /* AppNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigation.swift; sourceTree = "<group>"; };
+		79B17FB52F0D884500DAF850 /* FarmBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmBackground.swift; sourceTree = "<group>"; };
+		79B17FB62F0D884500DAF850 /* FarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmView.swift; sourceTree = "<group>"; };
+		79B17FB82F0D884500DAF850 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		79B17FB92F0D884500DAF850 /* MenuGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuGrid.swift; sourceTree = "<group>"; };
+		79B17FBB2F0D884500DAF850 /* CurrencyBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyBar.swift; sourceTree = "<group>"; };
+		79B17FBD2F0D884500DAF850 /* GoodiesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodiesScreen.swift; sourceTree = "<group>"; };
+		79B17FBE2F0D884500DAF850 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		79B17FBF2F0D884500DAF850 /* SheepBookScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepBookScreen.swift; sourceTree = "<group>"; };
+		79B17FC02F0D884500DAF850 /* ShopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreen.swift; sourceTree = "<group>"; };
+		79B17FCC2F0D9A9800DAF850 /* TutorialOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialOverlay.swift; sourceTree = "<group>"; };
+		79B17FCE2F0DA74B00DAF850 /* MorningCheckInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorningCheckInScreen.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		797D3E212F0C0E980013222F /* Frameworks */ = {
@@ -29,11 +58,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		792DE9C12F0D77850048F9D6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				792DE9BF2F0D77850048F9D6 /* AppRootView.swift */,
+				792DE9C02F0D77850048F9D6 /* Sheep_AtsumeApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		792DE9C42F0D77850048F9D6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				792DE9C22F0D77850048F9D6 /* NightResult.swift */,
+				792DE9C32F0D77850048F9D6 /* NightSuccessLevel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		792DE9C62F0D77850048F9D6 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				792DE9C42F0D77850048F9D6 /* Models */,
+				792DE9C52F0D77850048F9D6 /* GameState.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		792DE9CC2F0D77850048F9D6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FB72F0D884500DAF850 /* Farm */,
+				79B17FBA2F0D884500DAF850 /* Menu */,
+				79B17FBC2F0D884500DAF850 /* Overlays */,
+				79B17FC12F0D884500DAF850 /* Screens */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		797D3E1B2F0C0E980013222F = {
 			isa = PBXGroup;
 			children = (
+				79B17F9B2F0D87E100DAF850 /* Navigation */,
 				797D3E252F0C0E980013222F /* Products */,
-				797D3E262F0C0E980013222F /* Sheep Atsume */,
+				792DE9C12F0D77850048F9D6 /* App */,
+				792DE9C62F0D77850048F9D6 /* Game */,
+				792DE9CC2F0D77850048F9D6 /* UI */,
 			);
 			sourceTree = "<group>";
 		};
@@ -43,6 +113,53 @@
 				797D3E242F0C0E980013222F /* Sheep Atsume.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		79B17F9B2F0D87E100DAF850 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				79B17F9A2F0D87E100DAF850 /* AppNavigation.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		79B17FB72F0D884500DAF850 /* Farm */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FB52F0D884500DAF850 /* FarmBackground.swift */,
+				79B17FB62F0D884500DAF850 /* FarmView.swift */,
+			);
+			path = Farm;
+			sourceTree = "<group>";
+		};
+		79B17FBA2F0D884500DAF850 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FB82F0D884500DAF850 /* MenuButton.swift */,
+				79B17FB92F0D884500DAF850 /* MenuGrid.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		79B17FBC2F0D884500DAF850 /* Overlays */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FCC2F0D9A9800DAF850 /* TutorialOverlay.swift */,
+				79B17FBB2F0D884500DAF850 /* CurrencyBar.swift */,
+			);
+			path = Overlays;
+			sourceTree = "<group>";
+		};
+		79B17FC12F0D884500DAF850 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FCE2F0DA74B00DAF850 /* MorningCheckInScreen.swift */,
+				79B17FBD2F0D884500DAF850 /* GoodiesScreen.swift */,
+				79B17FBE2F0D884500DAF850 /* SettingsScreen.swift */,
+				79B17FBF2F0D884500DAF850 /* SheepBookScreen.swift */,
+				79B17FC02F0D884500DAF850 /* ShopScreen.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,9 +176,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				797D3E262F0C0E980013222F /* Sheep Atsume */,
 			);
 			name = "Sheep Atsume";
 			packageProductDependencies = (
@@ -119,6 +233,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				792DE9CD2F0D77850048F9D6 /* AppRootView.swift in Sources */,
+				792DE9D02F0D77850048F9D6 /* Sheep_AtsumeApp.swift in Sources */,
+				792DE9D12F0D77850048F9D6 /* NightResult.swift in Sources */,
+				79B17F9C2F0D87E100DAF850 /* AppNavigation.swift in Sources */,
+				792DE9D32F0D77850048F9D6 /* GameState.swift in Sources */,
+				79B17FCF2F0DA74B00DAF850 /* MorningCheckInScreen.swift in Sources */,
+				79B17FC32F0D884500DAF850 /* GoodiesScreen.swift in Sources */,
+				79B17FCD2F0D9A9800DAF850 /* TutorialOverlay.swift in Sources */,
+				79B17FC42F0D884500DAF850 /* SettingsScreen.swift in Sources */,
+				79B17FC52F0D884500DAF850 /* ShopScreen.swift in Sources */,
+				79B17FC62F0D884500DAF850 /* FarmView.swift in Sources */,
+				79B17FC72F0D884500DAF850 /* CurrencyBar.swift in Sources */,
+				79B17FC82F0D884500DAF850 /* FarmBackground.swift in Sources */,
+				79B17FC92F0D884500DAF850 /* MenuGrid.swift in Sources */,
+				79B17FCA2F0D884500DAF850 /* MenuButton.swift in Sources */,
+				79B17FCB2F0D884500DAF850 /* SheepBookScreen.swift in Sources */,
+				792DE9D42F0D77850048F9D6 /* NightSuccessLevel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
