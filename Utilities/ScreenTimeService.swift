@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 import DeviceActivity
 import FamilyControls
 import ManagedSettings
@@ -49,7 +50,7 @@ class ScreenTimeService: ObservableObject {
             repeats: true
         )
         
-        center.startMonitoring(scheduleName, with: schedule)
+        center.startMonitoring(scheduleName, during: schedule)
     }
     
     func stopMonitoring() {
@@ -87,16 +88,13 @@ class ScreenTimeService: ObservableObject {
             ? calendar.date(byAdding: .day, value: 1, to: windowEnd) ?? windowEnd
             : windowEnd
         
-        // Create activity report
-        let context = DeviceActivityReport.Context(.totalActivity)
-        let report = DeviceActivityReport(context)
-        
-        // Note: DeviceActivityReport requires a DeviceActivityName
+        // Note: DeviceActivityReport requires a DeviceActivityReport extension
         // For now, we'll use a simplified approach that queries the interval
         // Full implementation would require a custom report extension
         
         // Simplified: Return placeholder for now
         // Real implementation needs DeviceActivityReport extension
+        // DeviceActivityReport is not directly instantiable - it requires an extension
         return nil
     }
     
@@ -121,8 +119,6 @@ class ScreenTimeService: ObservableObject {
 // MARK: - DeviceActivityMonitor (for real-time monitoring)
 
 class BedtimeMonitor: DeviceActivityMonitor {
-    let screenTimeService = ScreenTimeService.shared
-    
     override func intervalDidStart(for activity: DeviceActivityName) {
         super.intervalDidStart(for: activity)
         // Bedtime started - could show Live Activity here
@@ -134,6 +130,7 @@ class BedtimeMonitor: DeviceActivityMonitor {
         Task { @MainActor in
             // This would be called when bedtime window ends
             // Fetch usage and update game state
+            // Access ScreenTimeService.shared here if needed
         }
     }
     
