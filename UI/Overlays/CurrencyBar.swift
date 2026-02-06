@@ -10,14 +10,20 @@ import SwiftUI
 struct CurrencyBar: View {
     @EnvironmentObject var gameState: GameState
     
+    private var thrivingCount: Int {
+        gameState.habitSheep.filter { $0.growthStage == .thriving }.count
+    }
+
+    private var habitCount: Int {
+        gameState.habitSheep.count
+    }
+
     var body: some View {
         HStack(spacing: 16) {
-            // Coins
-            currencyItem(icon: "🪙", label: "Coins", value: gameState.coins)
-            
-            // Streak
-            currencyItem(icon: "🔥", label: "Streak", value: gameState.streak)
-            
+            currencyItem(icon: "🔥", label: "Check-in streak", value: gameState.checkInStreak)
+            if habitCount > 0 {
+                currencyItem(icon: "🐑", label: "Thriving", value: thrivingCount, suffix: "/\(habitCount)")
+            }
             Spacer()
         }
         .padding(.horizontal, 16)
@@ -36,16 +42,16 @@ struct CurrencyBar: View {
     }
     
     @ViewBuilder
-    private func currencyItem(icon: String, label: String, value: Int) -> some View {
+    private func currencyItem(icon: String, label: String, value: Int, suffix: String = "") -> some View {
         HStack(spacing: 8) {
             Text(icon)
                 .font(.system(size: 20))
-            
+
             VStack(alignment: .leading, spacing: 2) {
                 Text(label)
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                Text("\(value)")
+                Text("\(value)\(suffix)")
                     .font(.system(size: 16, weight: .bold, design: .rounded))
                     .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
             }
@@ -61,6 +67,9 @@ struct CurrencyBar: View {
             CurrencyBar()
         }
     }
-    .environmentObject(GameState(coins: 150, streak: 5))
+    .environmentObject(GameState(habitSheep: [
+        HabitSheep(habitId: "a", title: "Habit A", systemImage: "moon.fill", growthStage: .thriving),
+        HabitSheep(habitId: "b", title: "Habit B", systemImage: "sun.fill", growthStage: .growing)
+    ], checkInStreak: 5))
 }
 

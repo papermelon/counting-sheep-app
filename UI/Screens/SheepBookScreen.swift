@@ -8,30 +8,69 @@
 import SwiftUI
 
 struct SheepBookScreen: View {
+    @EnvironmentObject var gameState: GameState
     let onClose: () -> Void
-    
+    var onSelectHabit: ((String) -> Void)?
+
     var body: some View {
         ZStack {
             // Background
             Color(red: 1.0, green: 0.85, blue: 0.9)
                 .ignoresSafeArea()
-            
+
             VStack(spacing: 0) {
-                // Header
                 screenHeader(title: "Sheep Book", icon: "🐑")
-                
-                // Content
+
                 ScrollView {
-                    VStack(spacing: 16) {
-                        Text("Your sheep collection will appear here...")
-                            .font(.title3)
-                            .foregroundStyle(.secondary)
-                            .padding(.top, 40)
+                    VStack(spacing: 12) {
+                        if gameState.habitSheep.isEmpty {
+                            Text("Your sheep will appear here after onboarding.")
+                                .font(.title3)
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+                                .padding(.top, 40)
+                        } else {
+                            ForEach(gameState.habitSheep) { sheep in
+                                habitSheepRow(sheep)
+                            }
+                        }
                     }
                     .padding()
                 }
             }
         }
+    }
+
+    private func habitSheepRow(_ sheep: HabitSheep) -> some View {
+        Button {
+            onSelectHabit?(sheep.habitId)
+        } label: {
+            HStack(spacing: 12) {
+                Image(systemName: sheep.systemImage)
+                    .font(.system(size: 24))
+                    .foregroundStyle(Color(red: 0.5, green: 0.35, blue: 0.6))
+                    .frame(width: 44, height: 44)
+                    .background(Circle().fill(Color.white.opacity(0.7)))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(sheep.displayTitle)
+                        .font(.headline)
+                        .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
+                    Text(sheep.growthStage.displayName)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 14)
+                    .fill(Color.white.opacity(0.8))
+            )
+        }
+        .buttonStyle(.plain)
     }
     
     @ViewBuilder
@@ -82,6 +121,9 @@ struct SheepBookScreen: View {
 }
 
 #Preview {
-    SheepBookScreen(onClose: { })
+    SheepBookScreen(onClose: { }, onSelectHabit: nil)
+        .environmentObject(GameState(habitSheep: [
+            HabitSheep(habitId: "phone_away_10pm", title: "Put phone away at 10pm", systemImage: "clock.badge.checkmark", growthStage: .growing)
+        ]))
 }
 

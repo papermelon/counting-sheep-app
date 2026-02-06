@@ -16,14 +16,28 @@
 		79B17FC32F0D884500DAF850 /* GoodiesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FBD2F0D884500DAF850 /* GoodiesScreen.swift */; };
 		79B17FC42F0D884500DAF850 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FBE2F0D884500DAF850 /* SettingsScreen.swift */; };
 		79B17FC52F0D884500DAF850 /* ShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FC02F0D884500DAF850 /* ShopScreen.swift */; };
-		79B17FC62F0D884500DAF850 /* FarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FB62F0D884500DAF850 /* FarmView.swift */; };
-		79B17FC72F0D884500DAF850 /* CurrencyBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FBB2F0D884500DAF850 /* CurrencyBar.swift */; };
-		79B17FC82F0D884500DAF850 /* FarmBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FB52F0D884500DAF850 /* FarmBackground.swift */; };
-		79B17FC92F0D884500DAF850 /* MenuGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FB92F0D884500DAF850 /* MenuGrid.swift */; };
-		79B17FCA2F0D884500DAF850 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FB82F0D884500DAF850 /* MenuButton.swift */; };
 		79B17FCB2F0D884500DAF850 /* SheepBookScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FBF2F0D884500DAF850 /* SheepBookScreen.swift */; };
 		79B17FCD2F0D9A9800DAF850 /* TutorialOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FCC2F0D9A9800DAF850 /* TutorialOverlay.swift */; };
 		79B17FCF2F0DA74B00DAF850 /* MorningCheckInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FCE2F0DA74B00DAF850 /* MorningCheckInScreen.swift */; };
+		79B17FD02F0DA74B00DAF850 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FD12F0DA74B00DAF850 /* NotificationScheduler.swift */; };
+		79B17FD22F0DA74B00DAF850 /* ScreenTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FD32F0DA74B00DAF850 /* ScreenTimeService.swift */; };
+		79B17FD62F0DA74B00DAF850 /* VerifiedModeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FD52F0DA74B00DAF850 /* VerifiedModeButton.swift */; };
+		79B17FE12F0DA74B00DAF850 /* OnboardingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FE02F0DA74B00DAF850 /* OnboardingModels.swift */; };
+		79B17FE32F0DA74B00DAF850 /* OnboardingChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FE22F0DA74B00DAF850 /* OnboardingChrome.swift */; };
+		79B17FE52F0DA74B00DAF850 /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FE42F0DA74B00DAF850 /* OnboardingFlowView.swift */; };
+		79B17FE72F0DA74B00DAF850 /* OnboardingStepViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FE62F0DA74B00DAF850 /* OnboardingStepViews.swift */; };
+		79B17FED2F0DA74B00DAF850 /* SheepGrowthStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FEA2F0DA74B00DAF850 /* SheepGrowthStage.swift */; };
+		79B17FEE2F0DA74B00DAF850 /* HabitSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FEB2F0DA74B00DAF850 /* HabitSchedule.swift */; };
+		79B17FEF2F0DA74B00DAF850 /* HabitSheep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FEC2F0DA74B00DAF850 /* HabitSheep.swift */; };
+		79B17FF12F0DA74B00DAF850 /* HabitCustomizationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FF02F0DA74B00DAF850 /* HabitCustomizationScreen.swift */; };
+		79B17FF32F0DA74B00DAF850 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FF22F0DA74B00DAF850 /* HomeTabView.swift */; };
+		79B17FF52F0DA74B00DAF850 /* AddHabitSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FF42F0DA74B00DAF850 /* AddHabitSheet.swift */; };
+		79B17FF72F0DA74B00DAF850 /* HabitDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FF62F0DA74B00DAF850 /* HabitDetailScreen.swift */; };
+		79B17FF92F0DA74B00DAF850 /* ProgressTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FF82F0DA74B00DAF850 /* ProgressTabView.swift */; };
+		79B17FFB2F0DA74B00DAF850 /* ToolkitTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FFA2F0DA74B00DAF850 /* ToolkitTabView.swift */; };
+		79B17FFD2F0DA74B00DAF850 /* CommunityTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FFC2F0DA74B00DAF850 /* CommunityTabView.swift */; };
+		79B180012F0DA74B00DAF850 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79B180002F0DA74B00DAF850 /* Assets.xcassets */; };
+		79B180032F0DA74B00DAF850 /* PixelArtSheepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B180022F0DA74B00DAF850 /* PixelArtSheepView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +59,25 @@
 		79B17FC02F0D884500DAF850 /* ShopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreen.swift; sourceTree = "<group>"; };
 		79B17FCC2F0D9A9800DAF850 /* TutorialOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialOverlay.swift; sourceTree = "<group>"; };
 		79B17FCE2F0DA74B00DAF850 /* MorningCheckInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorningCheckInScreen.swift; sourceTree = "<group>"; };
+		79B17FD12F0DA74B00DAF850 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
+		79B17FD32F0DA74B00DAF850 /* ScreenTimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTimeService.swift; sourceTree = "<group>"; };
+		79B17FD52F0DA74B00DAF850 /* VerifiedModeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedModeButton.swift; sourceTree = "<group>"; };
+		79B17FE02F0DA74B00DAF850 /* OnboardingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModels.swift; sourceTree = "<group>"; };
+		79B17FE22F0DA74B00DAF850 /* OnboardingChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingChrome.swift; sourceTree = "<group>"; };
+		79B17FE42F0DA74B00DAF850 /* OnboardingFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowView.swift; sourceTree = "<group>"; };
+		79B17FE62F0DA74B00DAF850 /* OnboardingStepViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepViews.swift; sourceTree = "<group>"; };
+		79B17FEA2F0DA74B00DAF850 /* SheepGrowthStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepGrowthStage.swift; sourceTree = "<group>"; };
+		79B17FEB2F0DA74B00DAF850 /* HabitSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSchedule.swift; sourceTree = "<group>"; };
+		79B17FEC2F0DA74B00DAF850 /* HabitSheep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSheep.swift; sourceTree = "<group>"; };
+		79B17FF02F0DA74B00DAF850 /* HabitCustomizationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCustomizationScreen.swift; sourceTree = "<group>"; };
+		79B17FF22F0DA74B00DAF850 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
+		79B17FF42F0DA74B00DAF850 /* AddHabitSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitSheet.swift; sourceTree = "<group>"; };
+		79B17FF62F0DA74B00DAF850 /* HabitDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailScreen.swift; sourceTree = "<group>"; };
+		79B17FF82F0DA74B00DAF850 /* ProgressTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTabView.swift; sourceTree = "<group>"; };
+		79B17FFA2F0DA74B00DAF850 /* ToolkitTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolkitTabView.swift; sourceTree = "<group>"; };
+		79B17FFC2F0DA74B00DAF850 /* CommunityTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTabView.swift; sourceTree = "<group>"; };
+		79B180002F0DA74B00DAF850 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		79B180022F0DA74B00DAF850 /* PixelArtSheepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelArtSheepView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,8 +103,11 @@
 		792DE9C42F0D77850048F9D6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				79B17FEC2F0DA74B00DAF850 /* HabitSheep.swift */,
+				79B17FEB2F0DA74B00DAF850 /* HabitSchedule.swift */,
 				792DE9C22F0D77850048F9D6 /* NightResult.swift */,
 				792DE9C32F0D77850048F9D6 /* NightSuccessLevel.swift */,
+				79B17FEA2F0DA74B00DAF850 /* SheepGrowthStage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -88,6 +124,8 @@
 		792DE9CC2F0D77850048F9D6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				79B180042F0DA74B00DAF850 /* Components */,
+				79B17FE82F0DA74B00DAF850 /* Onboarding */,
 				79B17FB72F0D884500DAF850 /* Farm */,
 				79B17FBA2F0D884500DAF850 /* Menu */,
 				79B17FBC2F0D884500DAF850 /* Overlays */,
@@ -96,14 +134,35 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		79B180042F0DA74B00DAF850 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				79B180022F0DA74B00DAF850 /* PixelArtSheepView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		79B17FE82F0DA74B00DAF850 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FE02F0DA74B00DAF850 /* OnboardingModels.swift */,
+				79B17FE22F0DA74B00DAF850 /* OnboardingChrome.swift */,
+				79B17FE42F0DA74B00DAF850 /* OnboardingFlowView.swift */,
+				79B17FE62F0DA74B00DAF850 /* OnboardingStepViews.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		797D3E1B2F0C0E980013222F = {
 			isa = PBXGroup;
 			children = (
+				79B180002F0DA74B00DAF850 /* Assets.xcassets */,
 				79B17F9B2F0D87E100DAF850 /* Navigation */,
 				797D3E252F0C0E980013222F /* Products */,
 				792DE9C12F0D77850048F9D6 /* App */,
 				792DE9C62F0D77850048F9D6 /* Game */,
 				792DE9CC2F0D77850048F9D6 /* UI */,
+				79B17FD42F0DA74B00DAF850 /* Utilities */,
 			);
 			sourceTree = "<group>";
 		};
@@ -153,6 +212,14 @@
 		79B17FC12F0D884500DAF850 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				79B17FF22F0DA74B00DAF850 /* HomeTabView.swift */,
+				79B17FF42F0DA74B00DAF850 /* AddHabitSheet.swift */,
+				79B17FF62F0DA74B00DAF850 /* HabitDetailScreen.swift */,
+				79B17FF82F0DA74B00DAF850 /* ProgressTabView.swift */,
+				79B17FFA2F0DA74B00DAF850 /* ToolkitTabView.swift */,
+				79B17FFC2F0DA74B00DAF850 /* CommunityTabView.swift */,
+				79B17FD52F0DA74B00DAF850 /* VerifiedModeButton.swift */,
+				79B17FF02F0DA74B00DAF850 /* HabitCustomizationScreen.swift */,
 				79B17FCE2F0DA74B00DAF850 /* MorningCheckInScreen.swift */,
 				79B17FBD2F0D884500DAF850 /* GoodiesScreen.swift */,
 				79B17FBE2F0D884500DAF850 /* SettingsScreen.swift */,
@@ -160,6 +227,15 @@
 				79B17FC02F0D884500DAF850 /* ShopScreen.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		79B17FD42F0DA74B00DAF850 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FD12F0DA74B00DAF850 /* NotificationScheduler.swift */,
+				79B17FD32F0DA74B00DAF850 /* ScreenTimeService.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79B180012F0DA74B00DAF850 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,13 +320,26 @@
 				79B17FCD2F0D9A9800DAF850 /* TutorialOverlay.swift in Sources */,
 				79B17FC42F0D884500DAF850 /* SettingsScreen.swift in Sources */,
 				79B17FC52F0D884500DAF850 /* ShopScreen.swift in Sources */,
-				79B17FC62F0D884500DAF850 /* FarmView.swift in Sources */,
-				79B17FC72F0D884500DAF850 /* CurrencyBar.swift in Sources */,
-				79B17FC82F0D884500DAF850 /* FarmBackground.swift in Sources */,
-				79B17FC92F0D884500DAF850 /* MenuGrid.swift in Sources */,
-				79B17FCA2F0D884500DAF850 /* MenuButton.swift in Sources */,
 				79B17FCB2F0D884500DAF850 /* SheepBookScreen.swift in Sources */,
 				792DE9D42F0D77850048F9D6 /* NightSuccessLevel.swift in Sources */,
+				79B17FD02F0DA74B00DAF850 /* NotificationScheduler.swift in Sources */,
+				79B17FD22F0DA74B00DAF850 /* ScreenTimeService.swift in Sources */,
+				79B17FD62F0DA74B00DAF850 /* VerifiedModeButton.swift in Sources */,
+				79B17FE12F0DA74B00DAF850 /* OnboardingModels.swift in Sources */,
+				79B17FE32F0DA74B00DAF850 /* OnboardingChrome.swift in Sources */,
+				79B17FE52F0DA74B00DAF850 /* OnboardingFlowView.swift in Sources */,
+				79B17FE72F0DA74B00DAF850 /* OnboardingStepViews.swift in Sources */,
+				79B17FED2F0DA74B00DAF850 /* SheepGrowthStage.swift in Sources */,
+				79B17FEE2F0DA74B00DAF850 /* HabitSchedule.swift in Sources */,
+				79B17FEF2F0DA74B00DAF850 /* HabitSheep.swift in Sources */,
+				79B17FF12F0DA74B00DAF850 /* HabitCustomizationScreen.swift in Sources */,
+				79B17FF32F0DA74B00DAF850 /* HomeTabView.swift in Sources */,
+				79B17FF52F0DA74B00DAF850 /* AddHabitSheet.swift in Sources */,
+				79B17FF72F0DA74B00DAF850 /* HabitDetailScreen.swift in Sources */,
+				79B17FF92F0DA74B00DAF850 /* ProgressTabView.swift in Sources */,
+				79B17FFB2F0DA74B00DAF850 /* ToolkitTabView.swift in Sources */,
+				79B17FFD2F0DA74B00DAF850 /* CommunityTabView.swift in Sources */,
+				79B180032F0DA74B00DAF850 /* PixelArtSheepView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

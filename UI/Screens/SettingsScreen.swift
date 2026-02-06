@@ -10,20 +10,21 @@ import SwiftUI
 struct SettingsScreen: View {
     @EnvironmentObject var gameState: GameState
     let onClose: () -> Void
-    
+    var onOpenHabitCustomization: ((String) -> Void)?
+    var onOpenCheckIn: (() -> Void)?
+
     var body: some View {
         ZStack {
-            // Background
             Color(red: 1.0, green: 0.9, blue: 0.75)
                 .ignoresSafeArea()
-            
+
             VStack(spacing: 0) {
-                // Header
                 screenHeader(title: "Settings", icon: "⚙️")
-                
-                // Content
+
                 ScrollView {
                     VStack(spacing: 20) {
+                        habitsSection
+                        checkInSection
                         modeSection
                         bedtimeSection
                         notificationsSection
@@ -33,6 +34,78 @@ struct SettingsScreen: View {
                 }
             }
         }
+    }
+
+    private var habitsSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Your habits")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
+
+            if gameState.habitSheep.isEmpty {
+                Text("No habits yet. Complete onboarding to add habits.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .padding()
+            } else {
+                ForEach(gameState.habitSheep) { sheep in
+                    Button {
+                        onOpenHabitCustomization?(sheep.habitId)
+                    } label: {
+                        HStack {
+                            Image(systemName: sheep.systemImage)
+                                .font(.title3)
+                                .foregroundStyle(Color(red: 0.5, green: 0.35, blue: 0.6))
+                                .frame(width: 36, alignment: .center)
+                            Text(sheep.displayTitle)
+                                .font(.subheadline)
+                                .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 12)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.7))
+        )
+    }
+
+    private var checkInSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Daily check-in")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
+            Button {
+                onOpenCheckIn?()
+            } label: {
+                HStack {
+                    Label("Mark how your habits went", systemImage: "checkmark.circle")
+                        .font(.subheadline)
+                        .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .padding(.vertical, 10)
+                .padding(.horizontal, 12)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.7))
+        )
     }
     
     @ViewBuilder
@@ -83,20 +156,12 @@ struct SettingsScreen: View {
     
     private var modeSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Mode")
+            Text("Tracking")
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
-            
-            Picker("Mode", selection: $gameState.mode) {
-                ForEach(GameMode.allCases, id: \.self) { mode in
-                    Text(mode.displayName).tag(mode)
-                }
-            }
-            .pickerStyle(.segmented)
-            
+
             VStack(alignment: .leading, spacing: 6) {
-                Text("Cozy: manual check-ins; sheep always return safely with common rewards.")
-                Text("Verified: uses Screen Time at night to auto-grade stars; better growth and rare items.")
+                Text("Each habit can be self-reported (you mark it done) or auto-tracked with Screen Time. Open a habit and turn on \"Use Screen Time\" for screen habits like \"Put phone away at 10pm\" to check it from device usage during your bedtime window.")
             }
             .font(.subheadline)
             .foregroundStyle(.secondary)
@@ -135,7 +200,7 @@ struct SettingsScreen: View {
                 .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
             
             DatePicker("Start", selection: $gameState.bedtimeStart, displayedComponents: .hourAndMinute)
-                .onChange(of: gameState.bedtimeStart) { _ in
+                .onChange(of: gameState.bedtimeStart) { _, _ in
                     NotificationScheduler.scheduleBedtimeAndMorning(
                         bedtimeStart: gameState.bedtimeStart,
                         bedtimeEnd: gameState.bedtimeEnd,
@@ -145,7 +210,7 @@ struct SettingsScreen: View {
                 }
             DatePicker("End", selection: $gameState.bedtimeEnd, displayedComponents: .hourAndMinute)
                 .environment(\.locale, Locale(identifier: "en_US_POSIX"))
-                .onChange(of: gameState.bedtimeEnd) { _ in
+                .onChange(of: gameState.bedtimeEnd) { _, _ in
                     NotificationScheduler.scheduleBedtimeAndMorning(
                         bedtimeStart: gameState.bedtimeStart,
                         bedtimeEnd: gameState.bedtimeEnd,
@@ -172,7 +237,7 @@ struct SettingsScreen: View {
                 .foregroundStyle(Color(red: 0.35, green: 0.25, blue: 0.15))
             
             Toggle("Remind me to check in", isOn: $gameState.notificationsEnabled)
-                .onChange(of: gameState.notificationsEnabled) { _ in
+                .onChange(of: gameState.notificationsEnabled) { _, _ in
                     NotificationScheduler.requestAuthorization { granted in
                         if granted {
                             NotificationScheduler.scheduleBedtimeAndMorning(
@@ -200,7 +265,6 @@ struct SettingsScreen: View {
 }
 
 #Preview {
-    SettingsScreen(onClose: { })
+    SettingsScreen(onClose: { }, onOpenHabitCustomization: nil)
         .environmentObject(GameState())
 }
-

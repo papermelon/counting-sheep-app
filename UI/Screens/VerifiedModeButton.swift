@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FamilyControls
 
 struct VerifiedModeButton: View {
     @ObservedObject var gameState: GameState
@@ -31,7 +32,7 @@ struct VerifiedModeButton: View {
                         Image(systemName: "clock.fill")
                     }
                     
-                    Text(isFetching ? "Fetching Screen Time..." : "Auto-grade (Screen Time)")
+                    Text(isFetching ? "Fetching Screen Time..." : "Update from Screen Time")
                         .font(.system(size: 15, weight: .semibold))
                 }
                 .frame(maxWidth: .infinity)
@@ -100,19 +101,16 @@ struct VerifiedModeButton: View {
         )
         
         if let minutes = minutes {
-            let level = gameState.logNightFromUsageMinutes(minutes)
+            applyScreenTimeResult(minutes: minutes)
             isFetching = false
             onComplete()
         } else {
-            // Fallback: Use simplified fetch or show manual option
-            // For now, use placeholder logic
             let fallbackMinutes = await screenTimeService.fetchUsageMinutesForInterval(
                 start: gameState.bedtimeStart,
                 end: gameState.bedtimeEnd
             )
-            
             if fallbackMinutes > 0 {
-                let level = gameState.logNightFromUsageMinutes(fallbackMinutes)
+                applyScreenTimeResult(minutes: fallbackMinutes)
                 isFetching = false
                 onComplete()
             } else {
@@ -121,5 +119,12 @@ struct VerifiedModeButton: View {
             }
         }
     }
-}
 
+    private func applyScreenTimeResult(minutes: Int) {
+        let level = GameState.level(forUsageMinutes: minutes)
+        let didIt = (level == .threeStars || level == .twoStars)
+        for habitId in gameState.verifiedScreenHabitIds {
+            gameState.recordHabitResult(habitId: habitId, didIt: didIt)
+        }
+    }
+}

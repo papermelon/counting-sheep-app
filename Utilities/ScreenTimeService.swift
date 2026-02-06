@@ -50,7 +50,12 @@ class ScreenTimeService: ObservableObject {
             repeats: true
         )
         
-        center.startMonitoring(scheduleName, during: schedule)
+        do {
+            try center.startMonitoring(scheduleName, during: schedule)
+        } catch {
+            // Avoid crashing on failed monitor start; consider surfacing this to UI if needed.
+            print("Failed to start Screen Time monitoring: \(error)")
+        }
     }
     
     func stopMonitoring() {
@@ -83,10 +88,7 @@ class ScreenTimeService: ObservableObject {
             of: yesterday
         ) else { return nil }
         
-        // Adjust end time if it's before start (next day)
-        let adjustedEnd = windowEnd < windowStart
-            ? calendar.date(byAdding: .day, value: 1, to: windowEnd) ?? windowEnd
-            : windowEnd
+        _ = (windowStart, windowEnd)
         
         // Note: DeviceActivityReport requires a DeviceActivityReport extension
         // For now, we'll use a simplified approach that queries the interval
@@ -119,12 +121,16 @@ class ScreenTimeService: ObservableObject {
 // MARK: - DeviceActivityMonitor (for real-time monitoring)
 
 class BedtimeMonitor: DeviceActivityMonitor {
-    override func intervalDidStart(for activity: DeviceActivityName) {
+    nonisolated override init() {
+        super.init()
+    }
+
+    nonisolated override func intervalDidStart(for activity: DeviceActivityName) {
         super.intervalDidStart(for: activity)
         // Bedtime started - could show Live Activity here
     }
     
-    override func intervalDidEnd(for activity: DeviceActivityName) {
+    nonisolated override func intervalDidEnd(for activity: DeviceActivityName) {
         super.intervalDidEnd(for: activity)
         // Bedtime ended - fetch usage and log night result
         Task { @MainActor in
@@ -134,9 +140,8 @@ class BedtimeMonitor: DeviceActivityMonitor {
         }
     }
     
-    override func eventDidReachThreshold(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
+    nonisolated override func eventDidReachThreshold(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
         super.eventDidReachThreshold(event, activity: activity)
         // Handle threshold events if needed
     }
 }
-

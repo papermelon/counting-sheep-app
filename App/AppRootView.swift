@@ -8,112 +8,71 @@
 import SwiftUI
 
 struct AppRootView: View {
+    @AppStorage(OnboardingPersistence.hasCompletedKey) private var hasCompletedOnboarding = false
     @State private var navigation = AppNavigation()
     @StateObject private var gameState = GameState()
     @State private var didStartTutorial = false
-    
+
     var body: some View {
-        ZStack {
-            // Layer 1: Farm is ALWAYS rendered underneath
-            FarmView()
-            
-            // Layer 1.5: Status card (top-left under menu)
-            if navigation.activeScreen == .farm || navigation.activeScreen == .menu {
-                VStack(alignment: .leading) {
-                    HStack {
-                        MenuButton {
-                            navigation.openMenu()
-                        }
-                        Spacer()
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
-                    
-                    farmStatusCard
-                        .padding(.leading, 16)
-                        .padding(.top, 8)
-                    
-                    Spacer()
-                }
-            }
-            
-            // Layer 2: Menu button (top-left) - visible on farm or menu
-            // (covered by the status card stack above)
-            
-            // Layer 3: Currency bar (always visible except in full screens)
-            if navigation.activeScreen == .farm || navigation.activeScreen == .menu {
-                VStack {
-                    Spacer()
-                    CurrencyBar()
-                }
-            }
-            
-            // Layer 4: Modals/Screens overlay
-            switch navigation.activeScreen {
-            case .farm:
-                EmptyView()
-                
-            case .menu:
-                MenuGrid(
-                    onSelect: { screen in
-                        navigation.navigate(to: screen)
-                    },
-                    onClose: {
-                        navigation.closeToFarm()
-                    }
-                )
-                .transition(.opacity)
-                
-            case .shop:
-                ShopScreen(onClose: { navigation.closeToFarm() })
-                    .transition(.move(edge: .trailing))
-                
-            case .goodies:
-                GoodiesScreen(onClose: { navigation.closeToFarm() })
-                    .transition(.move(edge: .trailing))
-                
-            case .sheepBook:
-                SheepBookScreen(onClose: { navigation.closeToFarm() })
-                    .transition(.move(edge: .trailing))
-                
-            case .settings:
-                SettingsScreen(onClose: { navigation.closeToFarm() })
-                    .transition(.move(edge: .trailing))
-                
-            case .checkIn:
-                MorningCheckInScreen(onClose: { navigation.closeToFarm() })
-                    .transition(.move(edge: .trailing))
-            }
-            
-            // Layer 5: Tutorial overlay (highest priority)
-            if navigation.isTutorialActive {
-                if navigation.tutorialStep < navigation.tutorialSteps.count {
-                    let step = navigation.tutorialSteps[navigation.tutorialStep]
-                    TutorialOverlay(
-                        title: step.title,
-                        message: step.message,
-                        isLast: navigation.tutorialStep == navigation.tutorialSteps.count - 1,
-                        onNext: { navigation.nextTutorialStep() },
-                        onSkip: { navigation.endTutorial() }
-                    )
-                }
+        Group {
+            if hasCompletedOnboarding {
+                mainContent
+            } else {
+                OnboardingFlowView(onComplete: {
+                    applyOnboardingToGameState()
+                })
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background {
+            if hasCompletedOnboarding {
+                Color.clear
+            } else {
+                Color.black
+            }
+        }
+        .ignoresSafeArea()
         .environmentObject(gameState)
         .environment(navigation)
+    }
+
+    private var mainContent: some View {
+        ZStack {
+            Group {
+                switch navigation.selectedTab {
+                case 1: ProgressTabView().environmentObject(gameState)
+                case 2: ToolkitTabView()
+                case 3: CommunityTabView()
+                default: HomeTabView().environmentObject(gameState)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .overlay(alignment: .bottom) {
+                tabBar
+            }
+
+            // Full-screen overlays when navigation requests them (e.g. habit customization from Settings)
+            if case .habitCustomization(let habitId) = navigation.activeScreen {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                    .onTapGesture { navigation.navigate(to: navigation.habitCustomizationReturnTo) }
+                HabitCustomizationScreen(
+                    habitId: habitId,
+                    onSave: { gameState.syncSettingsToStorage() },
+                    onClose: { navigation.navigate(to: navigation.habitCustomizationReturnTo) }
+                )
+                .environmentObject(gameState)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .transition(.move(edge: .trailing))
+            }
+
+        }
         .animation(.easeInOut(duration: 0.25), value: navigation.activeScreen)
         .onAppear {
             if !didStartTutorial {
-                navigation.startTutorial()
                 didStartTutorial = true
             }
-            
-            // Auto-prompt daily check-in when opening the app
-            if navigation.activeScreen == .farm && gameState.needsCheckInToday() {
-                navigation.navigate(to: .checkIn)
-            }
-            
-            // Re-schedule notifications on launch if enabled
+            seedHabitSheepFromOnboardingIfNeeded()
             NotificationScheduler.requestAuthorization { granted in
                 if granted && gameState.notificationsEnabled {
                     NotificationScheduler.scheduleBedtimeAndMorning(
@@ -123,17 +82,15 @@ struct AppRootView: View {
                     )
                 }
             }
-            
-            // Start Screen Time monitoring if in Verified mode
-            if gameState.mode == .verified {
+            if gameState.hasAnyVerifiedScreenHabit {
                 ScreenTimeService.shared.startMonitoring(
                     bedtimeStart: gameState.bedtimeStart,
                     bedtimeEnd: gameState.bedtimeEnd
                 )
             }
         }
-        .onChange(of: gameState.mode) { oldMode, newMode in
-            if newMode == .verified {
+        .onChange(of: gameState.verifiedScreenHabitIds.sorted().joined(separator: ",")) { _, _ in
+            if gameState.hasAnyVerifiedScreenHabit {
                 ScreenTimeService.shared.startMonitoring(
                     bedtimeStart: gameState.bedtimeStart,
                     bedtimeEnd: gameState.bedtimeEnd
@@ -143,7 +100,7 @@ struct AppRootView: View {
             }
         }
         .onChange(of: gameState.bedtimeStart) { _, _ in
-            if gameState.mode == .verified {
+            if gameState.hasAnyVerifiedScreenHabit {
                 ScreenTimeService.shared.startMonitoring(
                     bedtimeStart: gameState.bedtimeStart,
                     bedtimeEnd: gameState.bedtimeEnd
@@ -151,74 +108,75 @@ struct AppRootView: View {
             }
         }
         .onChange(of: gameState.bedtimeEnd) { _, _ in
-            if gameState.mode == .verified {
+            if gameState.hasAnyVerifiedScreenHabit {
                 ScreenTimeService.shared.startMonitoring(
                     bedtimeStart: gameState.bedtimeStart,
                     bedtimeEnd: gameState.bedtimeEnd
                 )
             }
         }
+        .sheet(isPresented: $navigation.showCheckInSheet) {
+            MorningCheckInScreen(onClose: { navigation.showCheckInSheet = false })
+                .environmentObject(gameState)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+        }
+    }
+
+    private var tabBar: some View {
+        HStack(spacing: 0) {
+            tabBarItem(index: 0, icon: "house.fill", label: "Home")
+            tabBarItem(index: 1, icon: "chart.line.uptrend.xyaxis", label: "Progress")
+            tabBarItem(index: 2, icon: "wrench.and.screwdriver.fill", label: "Toolkit")
+            tabBarItem(index: 3, icon: "person.3.fill", label: "Community")
+        }
+        .padding(.top, 8)
+        .padding(.bottom, 24)
+        .background(Color(white: 0.06).ignoresSafeArea(edges: .bottom))
+    }
+
+    private func tabBarItem(index: Int, icon: String, label: String) -> some View {
+        let selected = navigation.selectedTab == index
+        return Button {
+            navigation.selectedTab = index
+        } label: {
+            VStack(spacing: 4) {
+                Image(systemName: icon)
+                    .font(.system(size: 22))
+                Text(label)
+                    .font(.caption2)
+            }
+            .frame(maxWidth: .infinity)
+            .foregroundStyle(selected ? .white : .secondary)
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func applyOnboardingToGameState() {
+        guard let answers = OnboardingPersistence.loadAnswers() else { return }
+        if let bedtime = answers.typicalBedtime {
+            gameState.bedtimeStart = bedtime
+        }
+        seedHabitSheepFromOnboardingIfNeeded()
+        gameState.syncSettingsToStorage()
+    }
+
+    private func seedHabitSheepFromOnboardingIfNeeded() {
+        guard gameState.habitSheep.isEmpty,
+              let answers = OnboardingPersistence.loadAnswers() else { return }
+        let list = answers.selectedHabitIds.compactMap { id -> HabitSheep? in
+            guard let h = SleepHabit.all.first(where: { $0.id == id }) else { return nil }
+            return HabitSheep(habitId: h.id, title: h.title, systemImage: h.systemImage)
+        }
+        gameState.habitSheep = list.isEmpty ? [defaultHabitSheep] : list
+        gameState.syncSettingsToStorage()
+    }
+
+    private var defaultHabitSheep: HabitSheep {
+        HabitSheep(habitId: "default", title: "Sleep well", systemImage: "moon.zzz.fill")
     }
 }
 
 #Preview {
     AppRootView()
-}
-
-// MARK: - Farm Status Card
-private extension AppRootView {
-    var farmStatusCard: some View {
-        let result = gameState.lastNightResult?.level
-        let (title, desc, delta) = statusText(for: result)
-        
-        return VStack(alignment: .leading, spacing: 6) {
-            Text(title)
-                .font(.headline)
-                .foregroundStyle(Color(red: 0.32, green: 0.24, blue: 0.16))
-            
-            Text(desc)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            
-            HStack(spacing: 12) {
-                Label("\(gameState.streak)", systemImage: "flame.fill")
-                    .labelStyle(.titleAndIcon)
-                    .font(.footnote)
-                    .foregroundStyle(Color.orange)
-                
-                if let delta = delta {
-                    Label("+\(delta) coins", systemImage: "plus.circle.fill")
-                        .labelStyle(.titleAndIcon)
-                        .font(.footnote)
-                        .foregroundStyle(Color.green)
-                }
-            }
-        }
-        .padding(12)
-        .background(
-            RoundedRectangle(cornerRadius: 14)
-                .fill(Color.white.opacity(0.9))
-                .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 14)
-                .stroke(Color(red: 0.86, green: 0.78, blue: 0.65), lineWidth: 1)
-        )
-        .frame(maxWidth: 240, alignment: .leading)
-    }
-    
-    func statusText(for level: NightSuccessLevel?) -> (String, String, Int?) {
-        switch level {
-        case .threeStars:
-            return ("Great night ⭐⭐⭐", "Your sheep are well-rested.", 10)
-        case .twoStars:
-            return ("Okay night ⭐⭐", "A decent night for the flock.", 6)
-        case .oneStar:
-            return ("Slipped ⭐", "Some sheep wandered last night.", 2)
-        case .zeroStars:
-            return ("Rough night ☆", "A new day begins.", 0)
-        case .none:
-            return ("Welcome", "Check in nightly to grow your streak and earn coins.", nil)
-        }
-    }
 }

@@ -15,37 +15,33 @@ enum ActiveScreen: Equatable {
     case sheepBook
     case settings
     case checkIn
+    case habitCustomization(habitId: String)
 }
 
 @Observable
 class AppNavigation {
+    var selectedTab: Int = 0
     var activeScreen: ActiveScreen = .farm
+    var habitCustomizationReturnTo: ActiveScreen = .settings
+    var showCheckInSheet: Bool = false
     var isTutorialActive: Bool = false
     var tutorialStep: Int = 0
     
     // Session-only tutorial steps (no persistence yet)
     let tutorialSteps: [(title: String, message: String)] = [
         (
-            "Welcome to Counting Sheep",
-            "Nightly check-ins keep your flock rested. Great/Okay/Slipped/Bad give +10/+6/+2/+0 coins."
+            "Each sheep is a habit you chose",
+            "Take care of them by sticking to your habits. When you keep a habit, that sheep grows healthier."
         ),
         (
-            "Grow your streak",
-            "Higher streak → more sheep appear on your farm. Miss a night and the streak resets."
+            "Check in each morning",
+            "Mark how you did for each habit. When you keep a habit, that sheep grows. Miss it and they need care."
         ),
         (
-            "Open the Menu",
-            "Use the Menu to reach Shop, Goodies, Sheep Book, and Settings."
+            "Use the tabs",
+            "Home shows today’s habits. Progress, Toolkit, and Community are in the tab bar."
         )
     ]
-    
-    func openMenu() {
-        activeScreen = .menu
-    }
-    
-    func closeToFarm() {
-        activeScreen = .farm
-    }
     
     func navigate(to screen: ActiveScreen) {
         activeScreen = screen
@@ -67,5 +63,6 @@ class AppNavigation {
     
     func endTutorial() {
         isTutorialActive = false
+        OnboardingPersistence.hasCompletedTutorial = true
     }
 }

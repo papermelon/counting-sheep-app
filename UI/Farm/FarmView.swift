@@ -9,28 +9,26 @@ import SwiftUI
 
 struct FarmView: View {
     @EnvironmentObject var gameState: GameState
-    
-    private var sheepCount: Int {
-        // Always show at least one sheep so the farm feels alive on first launch
-        max(1, gameState.streak)
+
+    private var displaySheep: [HabitSheep] {
+        if gameState.habitSheep.isEmpty {
+            return [HabitSheep(habitId: "default", title: "Sleep well", systemImage: "moon.zzz.fill", growthStage: .needsCare)]
+        }
+        return gameState.habitSheep
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // Layer 1: Background
                 FarmBackground()
-                
-                // Layer 2: Sheep sprites
                 sheepLayer(in: geometry.size)
             }
         }
         .ignoresSafeArea()
     }
-    
+
     @ViewBuilder
     private func sheepLayer(in size: CGSize) -> some View {
-        // Deterministic grid placement so sheep stay visible and don't overlap
         let pasture = CGRect(
             x: size.width * 0.1,
             y: size.height * 0.35,
@@ -38,33 +36,57 @@ struct FarmView: View {
             height: size.height * 0.5
         )
         let columns = 3
-        let rows = max(1, Int(ceil(Double(sheepCount) / Double(columns))))
+        let count = displaySheep.count
+        let rows = max(1, Int(ceil(Double(count) / Double(columns))))
         let cellWidth = pasture.width / CGFloat(columns)
         let cellHeight = pasture.height / CGFloat(rows)
-        
-        ForEach(0..<sheepCount, id: \.self) { index in
+
+        ForEach(Array(displaySheep.enumerated()), id: \.element.habitId) { index, sheep in
             let row = index / columns
             let col = index % columns
             let x = pasture.minX + cellWidth * (CGFloat(col) + 0.5)
             let y = pasture.minY + cellHeight * (CGFloat(row) + 0.5)
-            
-            SheepSprite()
+
+            SheepSprite(sheep: sheep)
                 .position(x: x, y: y)
-                .id("sheep-\(index)-\(sheepCount)") // Stable positioning per count
+                .id("sheep-\(sheep.habitId)-\(sheep.growthStage.rawValue)")
         }
     }
 }
 
 struct SheepSprite: View {
+    let sheep: HabitSheep
+
+    private var scale: CGFloat {
+        switch sheep.growthStage {
+        case .needsCare: return 0.75
+        case .growing: return 1.0
+        case .thriving: return 1.15
+        }
+    }
+
+    private var opacity: Double {
+        switch sheep.growthStage {
+        case .needsCare: return 0.85
+        case .growing: return 1.0
+        case .thriving: return 1.0
+        }
+    }
+
     var body: some View {
         Text("🐑")
             .font(.system(size: 48))
+            .scaleEffect(scale)
+            .opacity(opacity)
             .shadow(color: .black.opacity(0.2), radius: 2, x: 1, y: 2)
     }
 }
 
 #Preview {
     FarmView()
-        .environmentObject(GameState(streak: 3))
+        .environmentObject(GameState(habitSheep: [
+            HabitSheep(habitId: "a", title: "Habit A", systemImage: "moon.fill", growthStage: .thriving),
+            HabitSheep(habitId: "b", title: "Habit B", systemImage: "sun.fill", growthStage: .growing),
+            HabitSheep(habitId: "c", title: "Habit C", systemImage: "star.fill", growthStage: .needsCare)
+        ]))
 }
-
