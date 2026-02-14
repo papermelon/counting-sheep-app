@@ -1,6 +1,6 @@
 //
 //  VerifiedModeButton.swift
-//  Sheep Atsume
+//  Counting Sheep
 //
 //  Created by Ngawang Chime on 5/1/26.
 //
@@ -27,6 +27,7 @@ struct VerifiedModeButton: View {
                     if isFetching {
                         ProgressView()
                             .progressViewStyle(.circular)
+                            .tint(.white)
                             .scaleEffect(0.8)
                     } else {
                         Image(systemName: "clock.fill")
@@ -35,6 +36,7 @@ struct VerifiedModeButton: View {
                     Text(isFetching ? "Fetching Screen Time..." : "Update from Screen Time")
                         .font(.system(size: 15, weight: .semibold))
                 }
+                .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 12)
                 .background(
@@ -48,7 +50,7 @@ struct VerifiedModeButton: View {
             if let error = errorMessage {
                 Text(error)
                     .font(.caption)
-                    .foregroundStyle(.red)
+                    .foregroundStyle(.orange)
             } else if screenTimeService.authorizationStatus == .notDetermined {
                 Button("Authorize Screen Time") {
                     Task {
@@ -56,7 +58,7 @@ struct VerifiedModeButton: View {
                     }
                 }
                 .font(.caption)
-                .foregroundStyle(.blue)
+                .foregroundStyle(Color(red: 0.6, green: 0.5, blue: 0.9))
             } else if screenTimeService.authorizationStatus == .denied {
                 Text("Screen Time access denied. Enable in Settings.")
                     .font(.caption)
@@ -67,11 +69,11 @@ struct VerifiedModeButton: View {
     
     private var buttonColor: Color {
         if isFetching {
-            return Color(red: 0.9, green: 0.9, blue: 0.9)
+            return Color(red: 0.5, green: 0.4, blue: 0.7)
         } else if screenTimeService.authorizationStatus == .approved {
-            return Color(red: 0.88, green: 0.92, blue: 1.0)
+            return Color(red: 0.6, green: 0.5, blue: 0.9)
         } else {
-            return Color(red: 0.95, green: 0.95, blue: 0.95)
+            return Color.white.opacity(0.2)
         }
     }
     

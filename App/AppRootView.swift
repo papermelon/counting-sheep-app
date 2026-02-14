@@ -1,6 +1,6 @@
 //
 //  AppRootView.swift
-//  Sheep Atsume
+//  Counting Sheep
 //
 //  Created by Ngawang Chime on 5/1/26.
 //
@@ -42,7 +42,7 @@ struct AppRootView: View {
                 switch navigation.selectedTab {
                 case 1: ProgressTabView().environmentObject(gameState)
                 case 2: ToolkitTabView()
-                case 3: CommunityTabView()
+                case 3: CommunityTabView().environmentObject(gameState)
                 default: HomeTabView().environmentObject(gameState)
                 }
             }
@@ -87,6 +87,10 @@ struct AppRootView: View {
                     bedtimeStart: gameState.bedtimeStart,
                     bedtimeEnd: gameState.bedtimeEnd
                 )
+            }
+            // Refresh sleep data from HealthKit if authorized
+            if gameState.healthKitAuthorized {
+                gameState.refreshSleepData()
             }
         }
         .onChange(of: gameState.verifiedScreenHabitIds.sorted().joined(separator: ",")) { _, _ in
@@ -137,6 +141,7 @@ struct AppRootView: View {
 
     private func tabBarItem(index: Int, icon: String, label: String) -> some View {
         let selected = navigation.selectedTab == index
+        let itemColor: Color = selected ? .white : Color.white.opacity(0.55)
         return Button {
             navigation.selectedTab = index
         } label: {
@@ -147,7 +152,7 @@ struct AppRootView: View {
                     .font(.caption2)
             }
             .frame(maxWidth: .infinity)
-            .foregroundStyle(selected ? .white : .secondary)
+            .foregroundStyle(itemColor)
         }
         .buttonStyle(.plain)
     }
@@ -166,7 +171,7 @@ struct AppRootView: View {
               let answers = OnboardingPersistence.loadAnswers() else { return }
         let list = answers.selectedHabitIds.compactMap { id -> HabitSheep? in
             guard let h = SleepHabit.all.first(where: { $0.id == id }) else { return nil }
-            return HabitSheep(habitId: h.id, title: h.title, systemImage: h.systemImage)
+            return HabitSheep(habitId: h.id, title: h.title, systemImage: h.systemImage, spriteSeed: HabitSheep.randomSpriteSeed())
         }
         gameState.habitSheep = list.isEmpty ? [defaultHabitSheep] : list
         gameState.syncSettingsToStorage()

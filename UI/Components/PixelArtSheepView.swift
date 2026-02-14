@@ -1,6 +1,6 @@
 //
 //  PixelArtSheepView.swift
-//  Sheep Atsume
+//  Counting Sheep
 //
 //  Stylized sheep for habit cards (pixel-art inspired: blocky, limited colors).
 //

@@ -1,0 +1,594 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		792DE9CD2F0D77850048F9D6 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DE9BF2F0D77850048F9D6 /* AppRootView.swift */; };
+		792DE9D02F0D77850048F9D6 /* Counting_SheepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DE9C02F0D77850048F9D6 /* Counting_SheepApp.swift */; };
+		792DE9D12F0D77850048F9D6 /* NightResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DE9C22F0D77850048F9D6 /* NightResult.swift */; };
+		792DE9D32F0D77850048F9D6 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DE9C52F0D77850048F9D6 /* GameState.swift */; };
+		792DE9D42F0D77850048F9D6 /* NightSuccessLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DE9C32F0D77850048F9D6 /* NightSuccessLevel.swift */; };
+		79B17F9C2F0D87E100DAF850 /* AppNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17F9A2F0D87E100DAF850 /* AppNavigation.swift */; };
+		79B17FC32F0D884500DAF850 /* GoodiesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FBD2F0D884500DAF850 /* GoodiesScreen.swift */; };
+		79B17FC42F0D884500DAF850 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FBE2F0D884500DAF850 /* SettingsScreen.swift */; };
+		79B17FC52F0D884500DAF850 /* ShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FC02F0D884500DAF850 /* ShopScreen.swift */; };
+		79B17FCB2F0D884500DAF850 /* SheepBookScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FBF2F0D884500DAF850 /* SheepBookScreen.swift */; };
+		79B17FCD2F0D9A9800DAF850 /* TutorialOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FCC2F0D9A9800DAF850 /* TutorialOverlay.swift */; };
+		79B17FCF2F0DA74B00DAF850 /* MorningCheckInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FCE2F0DA74B00DAF850 /* MorningCheckInScreen.swift */; };
+		79B17FD02F0DA74B00DAF850 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FD12F0DA74B00DAF850 /* NotificationScheduler.swift */; };
+		79B17FD22F0DA74B00DAF850 /* ScreenTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FD32F0DA74B00DAF850 /* ScreenTimeService.swift */; };
+		79B17FD62F0DA74B00DAF850 /* VerifiedModeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FD52F0DA74B00DAF850 /* VerifiedModeButton.swift */; };
+		79B17FE12F0DA74B00DAF850 /* OnboardingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FE02F0DA74B00DAF850 /* OnboardingModels.swift */; };
+		79B17FE32F0DA74B00DAF850 /* OnboardingChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FE22F0DA74B00DAF850 /* OnboardingChrome.swift */; };
+		79B17FE52F0DA74B00DAF850 /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FE42F0DA74B00DAF850 /* OnboardingFlowView.swift */; };
+		79B17FE72F0DA74B00DAF850 /* OnboardingStepViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FE62F0DA74B00DAF850 /* OnboardingStepViews.swift */; };
+		79B17FED2F0DA74B00DAF850 /* SheepGrowthStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FEA2F0DA74B00DAF850 /* SheepGrowthStage.swift */; };
+		79B17FEE2F0DA74B00DAF850 /* HabitSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FEB2F0DA74B00DAF850 /* HabitSchedule.swift */; };
+		79B17FEF2F0DA74B00DAF850 /* HabitSheep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FEC2F0DA74B00DAF850 /* HabitSheep.swift */; };
+		79B17FF12F0DA74B00DAF850 /* HabitCustomizationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FF02F0DA74B00DAF850 /* HabitCustomizationScreen.swift */; };
+		79B17FF32F0DA74B00DAF850 /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FF22F0DA74B00DAF850 /* HomeTabView.swift */; };
+		79B17FF52F0DA74B00DAF850 /* AddHabitSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FF42F0DA74B00DAF850 /* AddHabitSheet.swift */; };
+		79B17FF72F0DA74B00DAF850 /* HabitDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FF62F0DA74B00DAF850 /* HabitDetailScreen.swift */; };
+		79B17FF92F0DA74B00DAF850 /* ProgressTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FF82F0DA74B00DAF850 /* ProgressTabView.swift */; };
+		79B17FFB2F0DA74B00DAF850 /* ToolkitTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FFA2F0DA74B00DAF850 /* ToolkitTabView.swift */; };
+		79B17FFD2F0DA74B00DAF850 /* CommunityTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FFC2F0DA74B00DAF850 /* CommunityTabView.swift */; };
+		79B180012F0DA74B00DAF850 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79B180002F0DA74B00DAF850 /* Assets.xcassets */; };
+		79B180032F0DA74B00DAF850 /* PixelArtSheepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B180022F0DA74B00DAF850 /* PixelArtSheepView.swift */; };
+		79B180052F0DA74B00DAF850 /* PixelArtMenuSheepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B180062F0DA74B00DAF850 /* PixelArtMenuSheepView.swift */; };
+		79B180082F0DA74B00DAF850 /* SheepWithBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B180072F0DA74B00DAF850 /* SheepWithBadge.swift */; };
+		79B1800A2F0DA74B00DAF850 /* FarmSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B180092F0DA74B00DAF850 /* FarmSceneView.swift */; };
+		79B1800B2F0DA74B00DAF850 /* FarmBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FB52F0D884500DAF850 /* FarmBackground.swift */; };
+		79B1800C2F0DA74B00DAF850 /* FarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B17FB62F0D884500DAF850 /* FarmView.swift */; };
+		79B180112F0DA74B00DAF850 /* SleepRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B180102F0DA74B00DAF850 /* SleepRecord.swift */; };
+		79B180132F0DA74B00DAF850 /* SleepHealthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B180122F0DA74B00DAF850 /* SleepHealthService.swift */; };
+		7A1D0A2C2F50000100AAA001 /* Resources/Sleep Wellness Booklet.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7A1D0A2C2F50000100AAA002 /* Resources/Sleep Wellness Booklet.pdf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		792DE9BF2F0D77850048F9D6 /* AppRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootView.swift; sourceTree = "<group>"; };
+		792DE9C02F0D77850048F9D6 /* Counting_SheepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counting_SheepApp.swift; sourceTree = "<group>"; };
+		792DE9C22F0D77850048F9D6 /* NightResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightResult.swift; sourceTree = "<group>"; };
+		792DE9C32F0D77850048F9D6 /* NightSuccessLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightSuccessLevel.swift; sourceTree = "<group>"; };
+		792DE9C52F0D77850048F9D6 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		797D3E242F0C0E980013222F /* Counting Sheep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Counting Sheep.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		79B17F9A2F0D87E100DAF850 /* AppNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigation.swift; sourceTree = "<group>"; };
+		79B17FB52F0D884500DAF850 /* FarmBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmBackground.swift; sourceTree = "<group>"; };
+		79B17FB62F0D884500DAF850 /* FarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmView.swift; sourceTree = "<group>"; };
+		79B17FB82F0D884500DAF850 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		79B17FB92F0D884500DAF850 /* MenuGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuGrid.swift; sourceTree = "<group>"; };
+		79B17FBB2F0D884500DAF850 /* CurrencyBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyBar.swift; sourceTree = "<group>"; };
+		79B17FBD2F0D884500DAF850 /* GoodiesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodiesScreen.swift; sourceTree = "<group>"; };
+		79B17FBE2F0D884500DAF850 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		79B17FBF2F0D884500DAF850 /* SheepBookScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepBookScreen.swift; sourceTree = "<group>"; };
+		79B17FC02F0D884500DAF850 /* ShopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreen.swift; sourceTree = "<group>"; };
+		79B17FCC2F0D9A9800DAF850 /* TutorialOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialOverlay.swift; sourceTree = "<group>"; };
+		79B17FCE2F0DA74B00DAF850 /* MorningCheckInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorningCheckInScreen.swift; sourceTree = "<group>"; };
+		79B17FD12F0DA74B00DAF850 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
+		79B17FD32F0DA74B00DAF850 /* ScreenTimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTimeService.swift; sourceTree = "<group>"; };
+		79B17FD52F0DA74B00DAF850 /* VerifiedModeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedModeButton.swift; sourceTree = "<group>"; };
+		79B17FE02F0DA74B00DAF850 /* OnboardingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModels.swift; sourceTree = "<group>"; };
+		79B17FE22F0DA74B00DAF850 /* OnboardingChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingChrome.swift; sourceTree = "<group>"; };
+		79B17FE42F0DA74B00DAF850 /* OnboardingFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowView.swift; sourceTree = "<group>"; };
+		79B17FE62F0DA74B00DAF850 /* OnboardingStepViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepViews.swift; sourceTree = "<group>"; };
+		79B17FEA2F0DA74B00DAF850 /* SheepGrowthStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepGrowthStage.swift; sourceTree = "<group>"; };
+		79B17FEB2F0DA74B00DAF850 /* HabitSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSchedule.swift; sourceTree = "<group>"; };
+		79B17FEC2F0DA74B00DAF850 /* HabitSheep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSheep.swift; sourceTree = "<group>"; };
+		79B17FF02F0DA74B00DAF850 /* HabitCustomizationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCustomizationScreen.swift; sourceTree = "<group>"; };
+		79B17FF22F0DA74B00DAF850 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
+		79B17FF42F0DA74B00DAF850 /* AddHabitSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitSheet.swift; sourceTree = "<group>"; };
+		79B17FF62F0DA74B00DAF850 /* HabitDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailScreen.swift; sourceTree = "<group>"; };
+		79B17FF82F0DA74B00DAF850 /* ProgressTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTabView.swift; sourceTree = "<group>"; };
+		79B17FFA2F0DA74B00DAF850 /* ToolkitTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolkitTabView.swift; sourceTree = "<group>"; };
+		79B17FFC2F0DA74B00DAF850 /* CommunityTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTabView.swift; sourceTree = "<group>"; };
+		79B180002F0DA74B00DAF850 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		79B180022F0DA74B00DAF850 /* PixelArtSheepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelArtSheepView.swift; sourceTree = "<group>"; };
+		79B180062F0DA74B00DAF850 /* PixelArtMenuSheepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelArtMenuSheepView.swift; sourceTree = "<group>"; };
+		79B180072F0DA74B00DAF850 /* SheepWithBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepWithBadge.swift; sourceTree = "<group>"; };
+		79B180092F0DA74B00DAF850 /* FarmSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmSceneView.swift; sourceTree = "<group>"; };
+		79B180102F0DA74B00DAF850 /* SleepRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepRecord.swift; sourceTree = "<group>"; };
+		79B180122F0DA74B00DAF850 /* SleepHealthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepHealthService.swift; sourceTree = "<group>"; };
+		79DE1B6C2F376BA300D8C229 /* Counting Sheep.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Counting Sheep.entitlements"; sourceTree = "<group>"; };
+		7A1D0A2C2F50000100AAA002 /* Resources/Sleep Wellness Booklet.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Resources/Sleep Wellness Booklet.pdf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		797D3E212F0C0E980013222F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		792DE9C12F0D77850048F9D6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				792DE9BF2F0D77850048F9D6 /* AppRootView.swift */,
+				792DE9C02F0D77850048F9D6 /* Counting_SheepApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		792DE9C42F0D77850048F9D6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FEC2F0DA74B00DAF850 /* HabitSheep.swift */,
+				79B17FEB2F0DA74B00DAF850 /* HabitSchedule.swift */,
+				792DE9C22F0D77850048F9D6 /* NightResult.swift */,
+				792DE9C32F0D77850048F9D6 /* NightSuccessLevel.swift */,
+				79B17FEA2F0DA74B00DAF850 /* SheepGrowthStage.swift */,
+				79B180102F0DA74B00DAF850 /* SleepRecord.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		792DE9C62F0D77850048F9D6 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				792DE9C42F0D77850048F9D6 /* Models */,
+				792DE9C52F0D77850048F9D6 /* GameState.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		792DE9CC2F0D77850048F9D6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				79B180042F0DA74B00DAF850 /* Components */,
+				79B17FE82F0DA74B00DAF850 /* Onboarding */,
+				79B17FB72F0D884500DAF850 /* Farm */,
+				79B17FBA2F0D884500DAF850 /* Menu */,
+				79B17FBC2F0D884500DAF850 /* Overlays */,
+				79B17FC12F0D884500DAF850 /* Screens */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		797D3E1B2F0C0E980013222F = {
+			isa = PBXGroup;
+			children = (
+				79DE1B6C2F376BA300D8C229 /* Counting Sheep.entitlements */,
+				79B180002F0DA74B00DAF850 /* Assets.xcassets */,
+				7A1D0A2C2F50000100AAA002 /* Resources/Sleep Wellness Booklet.pdf */,
+				79B17F9B2F0D87E100DAF850 /* Navigation */,
+				797D3E252F0C0E980013222F /* Products */,
+				792DE9C12F0D77850048F9D6 /* App */,
+				792DE9C62F0D77850048F9D6 /* Game */,
+				792DE9CC2F0D77850048F9D6 /* UI */,
+				79B17FD42F0DA74B00DAF850 /* Utilities */,
+			);
+			sourceTree = "<group>";
+		};
+		797D3E252F0C0E980013222F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				797D3E242F0C0E980013222F /* Counting Sheep.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		79B17F9B2F0D87E100DAF850 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				79B17F9A2F0D87E100DAF850 /* AppNavigation.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		79B17FB72F0D884500DAF850 /* Farm */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FB52F0D884500DAF850 /* FarmBackground.swift */,
+				79B17FB62F0D884500DAF850 /* FarmView.swift */,
+			);
+			path = Farm;
+			sourceTree = "<group>";
+		};
+		79B17FBA2F0D884500DAF850 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FB82F0D884500DAF850 /* MenuButton.swift */,
+				79B17FB92F0D884500DAF850 /* MenuGrid.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		79B17FBC2F0D884500DAF850 /* Overlays */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FCC2F0D9A9800DAF850 /* TutorialOverlay.swift */,
+				79B17FBB2F0D884500DAF850 /* CurrencyBar.swift */,
+			);
+			path = Overlays;
+			sourceTree = "<group>";
+		};
+		79B17FC12F0D884500DAF850 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FF22F0DA74B00DAF850 /* HomeTabView.swift */,
+				79B17FF42F0DA74B00DAF850 /* AddHabitSheet.swift */,
+				79B17FF62F0DA74B00DAF850 /* HabitDetailScreen.swift */,
+				79B17FF82F0DA74B00DAF850 /* ProgressTabView.swift */,
+				79B17FFA2F0DA74B00DAF850 /* ToolkitTabView.swift */,
+				79B17FFC2F0DA74B00DAF850 /* CommunityTabView.swift */,
+				79B17FD52F0DA74B00DAF850 /* VerifiedModeButton.swift */,
+				79B17FF02F0DA74B00DAF850 /* HabitCustomizationScreen.swift */,
+				79B17FCE2F0DA74B00DAF850 /* MorningCheckInScreen.swift */,
+				79B17FBD2F0D884500DAF850 /* GoodiesScreen.swift */,
+				79B17FBE2F0D884500DAF850 /* SettingsScreen.swift */,
+				79B17FBF2F0D884500DAF850 /* SheepBookScreen.swift */,
+				79B17FC02F0D884500DAF850 /* ShopScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		79B17FD42F0DA74B00DAF850 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FD12F0DA74B00DAF850 /* NotificationScheduler.swift */,
+				79B17FD32F0DA74B00DAF850 /* ScreenTimeService.swift */,
+				79B180122F0DA74B00DAF850 /* SleepHealthService.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		79B17FE82F0DA74B00DAF850 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				79B17FE02F0DA74B00DAF850 /* OnboardingModels.swift */,
+				79B17FE22F0DA74B00DAF850 /* OnboardingChrome.swift */,
+				79B17FE42F0DA74B00DAF850 /* OnboardingFlowView.swift */,
+				79B17FE62F0DA74B00DAF850 /* OnboardingStepViews.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		79B180042F0DA74B00DAF850 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				79B180022F0DA74B00DAF850 /* PixelArtSheepView.swift */,
+				79B180062F0DA74B00DAF850 /* PixelArtMenuSheepView.swift */,
+				79B180072F0DA74B00DAF850 /* SheepWithBadge.swift */,
+				79B180092F0DA74B00DAF850 /* FarmSceneView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		797D3E232F0C0E980013222F /* Counting Sheep */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 797D3E2F2F0C0E9A0013222F /* Build configuration list for PBXNativeTarget "Counting Sheep" */;
+			buildPhases = (
+				797D3E202F0C0E980013222F /* Sources */,
+				797D3E212F0C0E980013222F /* Frameworks */,
+				797D3E222F0C0E980013222F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Counting Sheep";
+			packageProductDependencies = (
+			);
+			productName = "Counting Sheep";
+			productReference = 797D3E242F0C0E980013222F /* Counting Sheep.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		797D3E1C2F0C0E980013222F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2620;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					797D3E232F0C0E980013222F = {
+						CreatedOnToolsVersion = 26.2;
+					};
+				};
+			};
+			buildConfigurationList = 797D3E1F2F0C0E980013222F /* Build configuration list for PBXProject "Counting Sheep" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 797D3E1B2F0C0E980013222F;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 797D3E252F0C0E980013222F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				797D3E232F0C0E980013222F /* Counting Sheep */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		797D3E222F0C0E980013222F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79B180012F0DA74B00DAF850 /* Assets.xcassets in Resources */,
+				7A1D0A2C2F50000100AAA001 /* Resources/Sleep Wellness Booklet.pdf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		797D3E202F0C0E980013222F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				792DE9CD2F0D77850048F9D6 /* AppRootView.swift in Sources */,
+				792DE9D02F0D77850048F9D6 /* Counting_SheepApp.swift in Sources */,
+				792DE9D12F0D77850048F9D6 /* NightResult.swift in Sources */,
+				79B17F9C2F0D87E100DAF850 /* AppNavigation.swift in Sources */,
+				792DE9D32F0D77850048F9D6 /* GameState.swift in Sources */,
+				79B17FCF2F0DA74B00DAF850 /* MorningCheckInScreen.swift in Sources */,
+				79B17FC32F0D884500DAF850 /* GoodiesScreen.swift in Sources */,
+				79B17FCD2F0D9A9800DAF850 /* TutorialOverlay.swift in Sources */,
+				79B17FC42F0D884500DAF850 /* SettingsScreen.swift in Sources */,
+				79B17FC52F0D884500DAF850 /* ShopScreen.swift in Sources */,
+				79B17FCB2F0D884500DAF850 /* SheepBookScreen.swift in Sources */,
+				792DE9D42F0D77850048F9D6 /* NightSuccessLevel.swift in Sources */,
+				79B17FD02F0DA74B00DAF850 /* NotificationScheduler.swift in Sources */,
+				79B17FD22F0DA74B00DAF850 /* ScreenTimeService.swift in Sources */,
+				79B17FD62F0DA74B00DAF850 /* VerifiedModeButton.swift in Sources */,
+				79B17FE12F0DA74B00DAF850 /* OnboardingModels.swift in Sources */,
+				79B17FE32F0DA74B00DAF850 /* OnboardingChrome.swift in Sources */,
+				79B17FE52F0DA74B00DAF850 /* OnboardingFlowView.swift in Sources */,
+				79B17FE72F0DA74B00DAF850 /* OnboardingStepViews.swift in Sources */,
+				79B17FED2F0DA74B00DAF850 /* SheepGrowthStage.swift in Sources */,
+				79B17FEE2F0DA74B00DAF850 /* HabitSchedule.swift in Sources */,
+				79B17FEF2F0DA74B00DAF850 /* HabitSheep.swift in Sources */,
+				79B17FF12F0DA74B00DAF850 /* HabitCustomizationScreen.swift in Sources */,
+				79B17FF32F0DA74B00DAF850 /* HomeTabView.swift in Sources */,
+				79B17FF52F0DA74B00DAF850 /* AddHabitSheet.swift in Sources */,
+				79B17FF72F0DA74B00DAF850 /* HabitDetailScreen.swift in Sources */,
+				79B17FF92F0DA74B00DAF850 /* ProgressTabView.swift in Sources */,
+				79B17FFB2F0DA74B00DAF850 /* ToolkitTabView.swift in Sources */,
+				79B17FFD2F0DA74B00DAF850 /* CommunityTabView.swift in Sources */,
+				79B180032F0DA74B00DAF850 /* PixelArtSheepView.swift in Sources */,
+				79B180052F0DA74B00DAF850 /* PixelArtMenuSheepView.swift in Sources */,
+				79B180082F0DA74B00DAF850 /* SheepWithBadge.swift in Sources */,
+				79B1800A2F0DA74B00DAF850 /* FarmSceneView.swift in Sources */,
+				79B1800B2F0DA74B00DAF850 /* FarmBackground.swift in Sources */,
+				79B1800C2F0DA74B00DAF850 /* FarmView.swift in Sources */,
+				79B180112F0DA74B00DAF850 /* SleepRecord.swift in Sources */,
+				79B180132F0DA74B00DAF850 /* SleepHealthService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		797D3E2D2F0C0E9A0013222F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4KZQPZR47B;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		797D3E2E2F0C0E9A0013222F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4KZQPZR47B;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		797D3E302F0C0E9A0013222F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Counting Sheep.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4KZQPZR47B;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Counting Sheep reads your sleep data to show how your sleep habits are going and help your sheep thrive.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lamalabs.countingsheep;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		797D3E312F0C0E9A0013222F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Counting Sheep.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4KZQPZR47B;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Counting Sheep reads your sleep data to show how your sleep habits are going and help your sheep thrive.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lamalabs.countingsheep;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		797D3E1F2F0C0E980013222F /* Build configuration list for PBXProject "Counting Sheep" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				797D3E2D2F0C0E9A0013222F /* Debug */,
+				797D3E2E2F0C0E9A0013222F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		797D3E2F2F0C0E9A0013222F /* Build configuration list for PBXNativeTarget "Counting Sheep" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				797D3E302F0C0E9A0013222F /* Debug */,
+				797D3E312F0C0E9A0013222F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 797D3E1C2F0C0E980013222F /* Project object */;
+}

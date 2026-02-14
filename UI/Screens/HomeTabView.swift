@@ -1,6 +1,6 @@
 //
 //  HomeTabView.swift
-//  Sheep Atsume
+//  Counting Sheep
 //
 
 import SwiftUI
@@ -12,10 +12,13 @@ private struct HabitDetailDestination: Identifiable, Hashable {
 struct HomeTabView: View {
     @EnvironmentObject var gameState: GameState
     @Environment(AppNavigation.self) private var navigation
+    @AppStorage("HomeTabView.showFarm") private var showFarm: Bool = false
     @State private var selectedDay: Date = Date()
     @State private var showAddHabit = false
     @State private var showSettings = false
     @State private var habitDetailDestination: HabitDetailDestination?
+    /// The sheep whose stats card is shown at the bottom in farm mode.
+    @State private var selectedFarmSheepId: String?
 
     private let cal = Calendar.current
     /// Scrollable range: from 60 days ago through 7 days from now (dates left and right of today).
@@ -28,35 +31,73 @@ struct HomeTabView: View {
         NavigationStack {
             ZStack {
                 Color(white: 0.08).ignoresSafeArea()
+
                 VStack(spacing: 0) {
+                    if showFarm {
+                        FarmSceneView(
+                            sheep: gameState.habitSheep,
+                            isCompact: true,
+                            onTapSheep: { habitId in
+                                withAnimation(.easeInOut(duration: 0.25)) {
+                                    selectedFarmSheepId = selectedFarmSheepId == habitId ? nil : habitId
+                                }
+                            }
+                        )
+                        .frame(height: 250)
+                    }
+
                     dateStrip
                     habitList
                 }
-                .navigationTitle(selectedDayTitle)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(Color(white: 0.08), for: .navigationBar)
-                .toolbarColorScheme(.dark, for: .navigationBar)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) { }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        HStack(spacing: 16) {
-                            Button {
-                                showAddHabit = true
-                            } label: {
-                                Image(systemName: "plus.circle.fill")
-                                    .font(.title2)
-                                    .foregroundStyle(.white)
-                            }
-                            Button {
-                                showSettings = true
-                            } label: {
-                                Image(systemName: "person.circle.fill")
-                                    .font(.title2)
-                                    .foregroundStyle(.white)
-                            }
+
+                // Bottom stats card when a sheep is tapped in farm mode
+                if showFarm, let sheepId = selectedFarmSheepId,
+                   let sheep = gameState.habitSheep.first(where: { $0.habitId == sheepId }) {
+                    VStack {
+                        Spacer()
+                        farmSheepStatsCard(sheep)
+                            .padding(.horizontal, 16)
+                            .padding(.bottom, 80) // above tab bar
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                    }
+                }
+            }
+            .navigationTitle(selectedDayTitle)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(Color(white: 0.08), for: .navigationBar)
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            showFarm.toggle()
+                            if !showFarm { selectedFarmSheepId = nil }
+                        }
+                    } label: {
+                        Image(systemName: showFarm ? "list.bullet" : "leaf.fill")
+                            .font(.body)
+                            .foregroundStyle(.white)
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack(spacing: 16) {
+                        Button {
+                            showAddHabit = true
+                        } label: {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.title2)
+                                .foregroundStyle(.white)
+                        }
+                        Button {
+                            showSettings = true
+                        } label: {
+                            Image(systemName: "person.circle.fill")
+                                .font(.title2)
+                                .foregroundStyle(.white)
                         }
                     }
                 }
+            }
                 .sheet(isPresented: $showAddHabit) {
                     AddHabitSheet(onDismiss: { showAddHabit = false })
                         .environmentObject(gameState)
@@ -81,7 +122,6 @@ struct HomeTabView: View {
                         .environmentObject(gameState)
                 }
             }
-        }
     }
 
     private var dateStrip: some View {
@@ -96,18 +136,22 @@ struct HomeTabView: View {
                         Button {
                             selectedDay = day
                         } label: {
-                            VStack(spacing: 4) {
+                            VStack(spacing: 2) {
                                 Text(weekday)
                                     .font(.caption)
-                                    .foregroundStyle(isSelected ? Color.black : Color.secondary)
+                                    .fontWeight(.medium)
+                                    .foregroundStyle(isSelected ? Color.black : Color.white.opacity(0.75))
                                 Text("\(dayNum)")
-                                    .font(.headline)
+                                    .font(.title2)
+                                    .fontWeight(.bold)
                                     .foregroundStyle(isSelected ? Color.black : Color.white)
                                 Text(shortMonth(monthNum))
                                     .font(.caption2)
                                     .foregroundStyle(isSelected ? Color.black.opacity(0.8) : Color.white.opacity(0.6))
                             }
-                            .frame(width: 48, height: 58)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 8)
+                            .frame(width: 52, height: 62)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(isSelected ? Color.white : Color.white.opacity(0.15))
@@ -182,15 +226,91 @@ struct HomeTabView: View {
             .padding(.vertical, 16)
         }
     }
+
+    // MARK: - Farm sheep stats card (shown at bottom when tapping a sheep in farm mode)
+
+    private func farmSheepStatsCard(_ sheep: HabitSheep) -> some View {
+        let weightKg = habitWeightKg(for: sheep)
+        let doneToday = sheep.completed(on: Date())
+        return HStack(spacing: 14) {
+            SheepWithBadge(spriteSeed: sheep.spriteSeed, systemImage: sheep.systemImage, spriteScale: 3.5, badgeSize: 18)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(sheep.displayTitle)
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                HStack(spacing: 14) {
+                    HStack(spacing: 4) {
+                        Text("\(weightKg)")
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.orange)
+                        Text("KG")
+                            .font(.caption2)
+                            .foregroundStyle(.orange)
+                    }
+                    HStack(spacing: 4) {
+                        Image(systemName: "flame.fill")
+                            .font(.caption2)
+                            .foregroundStyle(.orange)
+                        Text("\(sheep.consecutiveDaysDone)")
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.orange)
+                    }
+                    Text(sheep.growthStage.displayName)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            VStack(spacing: 6) {
+                // Navigate to detail
+                Button {
+                    habitDetailDestination = HabitDetailDestination(id: sheep.habitId)
+                    selectedFarmSheepId = nil
+                } label: {
+                    Image(systemName: "chevron.right.circle.fill")
+                        .font(.title3)
+                        .foregroundStyle(.white.opacity(0.7))
+                }
+                .buttonStyle(.plain)
+
+                // Mark done
+                if doneToday {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.title3)
+                        .foregroundStyle(.green)
+                } else {
+                    Button {
+                        gameState.markHabitCompletedToday(habitId: sheep.habitId)
+                    } label: {
+                        Image(systemName: "circle")
+                            .font(.title3)
+                            .foregroundStyle(.gray)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+        .padding(14)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(white: 0.12))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                )
+                .shadow(color: .black.opacity(0.4), radius: 8, y: 4)
+        )
+    }
 }
 
-/// Maps growth stage (and optional streak) to a 0–100 HP-style value.
-private func habitStrengthHP(for sheep: HabitSheep) -> Double {
-    switch sheep.growthStage {
-    case .needsCare: return 20
-    case .growing: return min(100, 50 + Double(sheep.consecutiveDaysDone) * 5)
-    case .thriving: return min(100, 80 + Double(sheep.consecutiveDaysDone) * 2)
-    }
+/// Display-facing sheep weight in KG for home cards.
+private func habitWeightKg(for sheep: HabitSheep) -> Int {
+    sheep.weightKg
 }
 
 private struct HabitCardView: View {
@@ -205,14 +325,14 @@ private struct HabitCardView: View {
         sheep.completed(on: selectedDay)
     }
 
-    private var hp: Double {
-        habitStrengthHP(for: sheep)
+    private var weightKg: Int {
+        habitWeightKg(for: sheep)
     }
 
     var body: some View {
         Button(action: onTap) {
             HStack(spacing: 14) {
-                PixelArtSheepView(habitStrength: hp, size: 52)
+                SheepWithBadge(spriteSeed: sheep.spriteSeed, systemImage: sheep.systemImage, spriteScale: 4, badgeSize: 20)
 
                 VStack(alignment: .leading, spacing: 6) {
                     Text(sheep.displayTitle)
@@ -222,13 +342,13 @@ private struct HabitCardView: View {
 
                     HStack(spacing: 14) {
                         HStack(spacing: 4) {
-                            Text("HP")
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
-                            Text("\(Int(hp))")
+                            Text("\(weightKg)")
                                 .font(.caption)
                                 .fontWeight(.semibold)
-                                .foregroundStyle(hpColor)
+                                .foregroundStyle(.orange)
+                            Text("KG")
+                                .font(.caption2)
+                                .foregroundStyle(.orange)
                         }
                         HStack(spacing: 4) {
                             Image(systemName: "flame.fill")
@@ -237,7 +357,7 @@ private struct HabitCardView: View {
                             Text("\(sheep.consecutiveDaysDone)")
                                 .font(.caption)
                                 .fontWeight(.semibold)
-                                .foregroundStyle(.white)
+                                .foregroundStyle(.orange)
                         }
                     }
                 }
@@ -278,11 +398,6 @@ private struct HabitCardView: View {
         }
     }
 
-    private var hpColor: Color {
-        if hp >= 66 { return Color(red: 0.4, green: 0.8, blue: 0.5) }
-        if hp >= 33 { return Color.orange }
-        return Color(red: 0.95, green: 0.4, blue: 0.35)
-    }
 }
 
 #Preview {

@@ -1,6 +1,6 @@
 //
 //  OnboardingFlowView.swift
-//  Sheep Atsume
+//  Counting Sheep
 //
 //  Created by Ngawang Chime on 5/1/26.
 //
@@ -22,7 +22,7 @@ struct OnboardingFlowView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                // Top bar: back + progress
+                // Top bar: back + progress (extra top padding to clear status bar)
                 HStack(alignment: .center, spacing: 12) {
                     if flowState.currentStep.canGoBack {
                         OnboardingBackButton {
@@ -36,7 +36,7 @@ struct OnboardingFlowView: View {
                         .frame(maxWidth: .infinity)
                 }
                 .padding(.horizontal, 16)
-                .padding(.top, 8)
+                .padding(.top, 52)
                 .padding(.bottom, 16)
 
                 // Step content
@@ -81,6 +81,12 @@ struct OnboardingFlowView: View {
             OnboardingSleepDurationStep(answers: answersBinding)
         case .sleepChallenges:
             OnboardingSleepChallengesStep(answers: answersBinding)
+        case .exerciseFrequency:
+            OnboardingExerciseStep(answers: answersBinding)
+        case .screentimeConcerns:
+            OnboardingScreentimeStep(answers: answersBinding)
+        case .dietGoals:
+            OnboardingDietStep(answers: answersBinding)
         case .pickHabit:
             OnboardingPickHabitStep(answers: answersBinding)
         case .finish:
@@ -102,8 +108,10 @@ struct OnboardingFlowView: View {
             return flowState.answers.typicalBedtime != nil
         case .sleepDuration:
             return flowState.answers.sleepDurationBucket != nil
-        case .sleepChallenges:
-            return true
+        case .sleepChallenges, .screentimeConcerns, .dietGoals:
+            return true  // optional multi-select
+        case .exerciseFrequency:
+            return flowState.answers.exerciseFrequency != nil
         }
     }
 

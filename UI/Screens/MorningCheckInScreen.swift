@@ -1,11 +1,14 @@
 //
 //  MorningCheckInScreen.swift
-//  Sheep Atsume
+//  Counting Sheep
 //
 //  Created by Ngawang Chime on 5/1/26.
 //
 
 import SwiftUI
+
+private let appAccent = Color(red: 0.6, green: 0.5, blue: 0.9)
+private let cardBackground = Color.white.opacity(0.08)
 
 struct MorningCheckInScreen: View {
     @EnvironmentObject var gameState: GameState
@@ -15,8 +18,7 @@ struct MorningCheckInScreen: View {
 
     var body: some View {
         ZStack {
-            Color(red: 0.95, green: 0.98, blue: 1.0)
-                .ignoresSafeArea()
+            Color(white: 0.08).ignoresSafeArea()
 
             VStack(spacing: 16) {
                 header
@@ -24,8 +26,9 @@ struct MorningCheckInScreen: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         Text("How did your habits go?")
-                            .font(.title3.bold())
-                            .foregroundStyle(Color(red: 0.25, green: 0.2, blue: 0.15))
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
 
                         if gameState.habitSheep.isEmpty {
@@ -51,10 +54,11 @@ struct MorningCheckInScreen: View {
                 }
 
                 doneButton
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, 20)
                     .padding(.bottom, 24)
             }
         }
+        .preferredColorScheme(.dark)
         .onAppear {
             let cal = Calendar.current
             habitResults = Dictionary(uniqueKeysWithValues: gameState.habitSheep.map { sheep in
@@ -67,40 +71,48 @@ struct MorningCheckInScreen: View {
     private var header: some View {
         HStack {
             Button(action: onClose) {
-                Label("Close", systemImage: "xmark")
-                    .labelStyle(.titleAndIcon)
+                HStack(spacing: 6) {
+                    Image(systemName: "xmark")
+                    Text("Close")
+                        .font(.subheadline)
+                }
+                .foregroundStyle(.white)
             }
-            .buttonStyle(.bordered)
+            .buttonStyle(.plain)
 
             Spacer()
 
             Text("Morning Check-in")
-                .font(.title3.bold())
+                .font(.headline)
+                .foregroundStyle(.white)
 
             Spacer()
 
             if gameState.checkInStreak > 0 {
-                Label("\(gameState.checkInStreak)", systemImage: "flame.fill")
-                    .font(.footnote)
-                    .foregroundStyle(Color.orange)
+                HStack(spacing: 4) {
+                    Image(systemName: "flame.fill")
+                        .foregroundStyle(.orange)
+                    Text("\(gameState.checkInStreak)")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.orange)
+                }
             } else {
-                Color.clear.frame(width: 60)
+                Color.clear.frame(width: 44, height: 32)
             }
         }
-        .padding(.horizontal)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 12)
     }
 
     private func habitCheckRow(_ sheep: HabitSheep) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 14) {
             HStack(spacing: 12) {
-                Image(systemName: sheep.systemImage)
-                    .font(.title2)
-                    .foregroundStyle(Color(red: 0.5, green: 0.35, blue: 0.6))
-                    .frame(width: 40, height: 40)
+                SheepWithBadge(spriteSeed: sheep.spriteSeed, systemImage: sheep.systemImage, spriteScale: 3, badgeSize: 16)
 
                 Text(sheep.displayTitle)
                     .font(.body)
-                    .foregroundStyle(Color(red: 0.3, green: 0.25, blue: 0.2))
+                    .foregroundStyle(.white)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -115,8 +127,8 @@ struct MorningCheckInScreen: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
                         .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(habitResults[sheep.habitId] == false ? Color.red.opacity(0.7) : Color.gray.opacity(0.2))
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(habitResults[sheep.habitId] == false ? Color.white.opacity(0.25) : cardBackground)
                         )
                 }
                 .buttonStyle(.plain)
@@ -130,8 +142,8 @@ struct MorningCheckInScreen: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
                         .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(habitResults[sheep.habitId] == true ? Color.green.opacity(0.8) : Color.gray.opacity(0.2))
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(habitResults[sheep.habitId] == true ? Color.green.opacity(0.6) : cardBackground)
                         )
                 }
                 .buttonStyle(.plain)
@@ -139,9 +151,8 @@ struct MorningCheckInScreen: View {
         }
         .padding(16)
         .background(
-            RoundedRectangle(cornerRadius: 14)
-                .fill(Color.white.opacity(0.9))
-                .shadow(color: .black.opacity(0.06), radius: 4, x: 0, y: 2)
+            RoundedRectangle(cornerRadius: 16)
+                .fill(cardBackground)
         )
     }
 
@@ -151,13 +162,13 @@ struct MorningCheckInScreen: View {
             onClose()
         } label: {
             Text("Done")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.headline)
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
+                .padding(.vertical, 16)
                 .background(
                     RoundedRectangle(cornerRadius: 14)
-                        .fill(Color(red: 0.4, green: 0.6, blue: 0.5))
+                        .fill(Color.green.opacity(0.7))
                 )
         }
         .buttonStyle(.plain)
